@@ -1,0 +1,15 @@
+/*
+ * Copyright (c) 2022. Global Collect Services B.V
+ */
+
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+rootProject.name = "exampleapp"
+include ':xml'
+include ':compose'
+include ':common'

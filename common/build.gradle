@@ -1,0 +1,38 @@
+/*
+ * Copyright (c) 2022. Global Collect Services B.V
+ */
+
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+}
+
+android {
+    compileSdk 31
+
+    kotlinOptions {
+        freeCompilerArgs += [
+                "-Xuse-experimental=kotlinx.coroutines.ExperimentalCoroutinesApi",
+                "-Xuse-experimental=kotlinx.coroutines.ObsoleteCoroutinesApi"]
+    }
+}
+
+dependencies {
+    // Kotlin
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
+    implementation "com.google.code.gson:gson:$gson_version"
+    implementation 'org.apache.commons:commons-lang3:3.9'
+    // Android X
+    implementation "androidx.core:core-ktx:$core_version"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-livedata-core-ktx:$lifecycle_version"
+
+    // UI
+    implementation "com.google.android.material:material:$material_version"
+
+    // Google pay
+    implementation "com.google.android.gms:play-services-wallet:$googlePay_version"
+
+    // Worldline
+    implementation "com.ingenico.connect.gateway:connect-sdk-client-android:$connectSDK_version"
+}

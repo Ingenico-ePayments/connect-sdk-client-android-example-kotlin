@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2022. Global Collect Services B.V
+  -->
+
+<resources>
+    <declare-styleable name="LoadingButton">
+        <attr name="android:text" format="string" />
+        <attr name="android:enabled" format="boolean" />
+    </declare-styleable>
+</resources>

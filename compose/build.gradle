@@ -1,0 +1,90 @@
+/*
+ * Copyright (c) 2022. Global Collect Services B.V
+ */
+
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+}
+
+android {
+    compileSdk 31
+
+    defaultConfig {
+        applicationId "com.example.android.exampleapp.compose"
+        minSdk 21
+        targetSdk 31
+        versionCode 1
+        versionName "1.0"
+
+        buildFeatures {
+            compose true
+        }
+
+        vectorDrawables {
+            useSupportLibrary true
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.2.0-rc01"
+        kotlinCompilerVersion '1.6.10'
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    packagingOptions {
+        resources {
+            excludes += '/META-INF/{AL2.0,LGPL2.1}'
+        }
+    }
+}
+
+dependencies {
+    // Project
+    implementation project(path: ':common')
+
+    // Kotlin
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
+
+    // Android X
+    implementation "androidx.core:core-ktx:$core_version"
+    implementation "androidx.appcompat:appcompat:$appCompat_version"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"
+
+    // UI
+    implementation "com.google.android.material:material:$material_version"
+    implementation("io.coil-kt:coil-compose:1.4.0")
+
+    // Jetpack compose
+    implementation "androidx.compose.ui:ui:$compose_version"
+    implementation "androidx.compose.material:material:$compose_version"
+    implementation "androidx.compose.ui:ui-tooling-preview:$compose_version"
+    implementation 'androidx.activity:activity-compose:1.4.0'
+    implementation 'com.google.accompanist:accompanist-insets:0.24.1-alpha'
+    implementation 'com.google.accompanist:accompanist-navigation-animation:0.21.2-beta'
+    implementation "androidx.compose.material:material-icons-extended:$compose_version"
+    implementation "androidx.compose.runtime:runtime-livedata:$compose_version"
+    debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
+
+    // Google pay
+    implementation "com.google.android.gms:play-services-wallet:$googlePay_version"
+
+    // Worldline
+    implementation "com.ingenico.connect.gateway:connect-sdk-client-android:$connectSDK_version"
+
+    implementation "com.google.code.gson:gson:$gson_version"
+}
