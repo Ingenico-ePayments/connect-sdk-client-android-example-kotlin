@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-  ~ Copyright (c) 2022. Global Collect Services B.V
-  -->
-
 <resources>
-	<string name="app_name" translatable="false">exampleapp</string>
+	<!--
+		This file was auto-generated from translations available in the Configuration Center.
+		Any manual changes may be overwritten.
+	-->
+
+	<string name="app_name" translatable="false">Connect example application</string>
 
 	<!-- Payment configuration -->
 	<string name="payment_configuration_client_session_details" translatable="false">Client session details</string>
@@ -46,7 +47,6 @@
 	<string name="payment_result_copy_encrypted_fields_data_to_clipboard" translatable="false">Copy to clipboard</string>
 	<string name="payment_result_return_to_start" translatable="false">Return to start</string>
 
-	<!-- Global Collect language pack -->
 	<string name="gc.app.general.clipboard.feedback">The numbers have been copied.</string>
 	<string name="gc.app.general.errors.noInternetConnection.bodytext">It seems there is no connection to the internet, so please verify this and try again.</string>
 	<string name="gc.app.general.errors.noInternetConnection.button">OK</string>
@@ -443,8 +443,8 @@
 	<string name="gc.general.paymentProducts.320.preparing">Preparing Google Pay</string>
 	<string name="gc.general.paymentProducts.3201.name">PostFinance Card</string>
 	<string name="gc.general.paymentProducts.3202.name">PostFinance e-finance</string>
-	<string name="gc.general.paymentProducts.4001.name">RuPay credit</string>
-	<string name="gc.general.paymentProducts.4002.name">RuPay debit</string>
+	<string name="gc.general.paymentProducts.4001.name">RuPay Credit</string>
+	<string name="gc.general.paymentProducts.4002.name">RuPay Debit</string>
 	<string name="gc.general.paymentProducts.402.name">e-Przelewy</string>
 	<string name="gc.general.paymentProducts.4101.divider">Or</string>
 	<string name="gc.general.paymentProducts.4101.introduction">How would you like to pay?</string>
@@ -454,7 +454,7 @@
 	<string name="gc.general.paymentProducts.4101.payWithVPALabel">Provide your Virtual Payment Address (VPA) and press pay</string>
 	<string name="gc.general.paymentProducts.4101.processing">Your payment is being processed. Please check your UPI account.</string>
 	<string name="gc.general.paymentProducts.4101.qrCodeLabel">Or open the app on your phone, click ‘Pay’ and scan the QR code.</string>
-	<string name="gc.general.paymentProducts.4101.qrCodeLabelNoButton">Scan the QR code to complete the payment</string>
+	<string name="gc.general.paymentProducts.4101.qrCodeLabel.noButton">Scan the QR code to complete the payment</string>
 	<string name="gc.general.paymentProducts.4101.refreshPaymentButtonText">Refresh payment status</string>
 	<string name="gc.general.paymentProducts.4101.refreshPaymentLabel">Click the button below to refresh your payment status.</string>
 	<string name="gc.general.paymentProducts.4102.name">eNACH</string>

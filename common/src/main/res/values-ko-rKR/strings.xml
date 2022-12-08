@@ -401,8 +401,8 @@
 	<string name="gc.general.paymentProducts.320.preparing">Google Pay 준비 중</string>
 	<string name="gc.general.paymentProducts.3201.name">PostFinance Card</string>
 	<string name="gc.general.paymentProducts.3202.name">PostFinance e-finance</string>
-	<string name="gc.general.paymentProducts.4001.name">RuPay credit</string>
-	<string name="gc.general.paymentProducts.4002.name">RuPay debit</string>
+	<string name="gc.general.paymentProducts.4001.name">RuPay Credit</string>
+	<string name="gc.general.paymentProducts.4002.name">RuPay Debit</string>
 	<string name="gc.general.paymentProducts.402.name">e-Przelewy</string>
 	<string name="gc.general.paymentProducts.4101.divider">또는</string>
 	<string name="gc.general.paymentProducts.4101.introduction">어떻게 결제하시겠습니까?</string>
@@ -412,7 +412,7 @@
 	<string name="gc.general.paymentProducts.4101.payWithVPALabel">가상 결제 주소(VPA)를 입력하고 결제를 누르십시오.</string>
 	<string name="gc.general.paymentProducts.4101.processing">결제를 처리하고 있습니다. UPI 계정을 확인하십시오.</string>
 	<string name="gc.general.paymentProducts.4101.qrCodeLabel">또는 휴대전화에서 앱을 열어 ‘Pay’를 클릭하고 QR 코드를 스캔합니다.</string>
-	<string name="gc.general.paymentProducts.4101.qrCodeLabelNoButton">QR 코드를 스캔해 결제를 완료해 주십시오.</string>
+	<string name="gc.general.paymentProducts.4101.qrCodeLabel.noButton">QR 코드를 스캔해 결제를 완료해 주십시오.</string>
 	<string name="gc.general.paymentProducts.4101.refreshPaymentButtonText">결제 상태 새로 고침</string>
 	<string name="gc.general.paymentProducts.4101.refreshPaymentLabel">결제 상태를 새로 고침 하려면 아래 버튼을 클릭하십시오.</string>
 	<string name="gc.general.paymentProducts.4102.name">eNACH</string>

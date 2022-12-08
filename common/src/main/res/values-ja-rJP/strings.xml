@@ -401,8 +401,8 @@
 	<string name="gc.general.paymentProducts.320.preparing">Google Payを準備中です</string>
 	<string name="gc.general.paymentProducts.3201.name">PostFinance Card</string>
 	<string name="gc.general.paymentProducts.3202.name">PostFinance e-finance</string>
-	<string name="gc.general.paymentProducts.4001.name">RuPay credit</string>
-	<string name="gc.general.paymentProducts.4002.name">RuPay debit</string>
+	<string name="gc.general.paymentProducts.4001.name">RuPay Credit</string>
+	<string name="gc.general.paymentProducts.4002.name">RuPay Debit</string>
 	<string name="gc.general.paymentProducts.402.name">e-Przelewy</string>
 	<string name="gc.general.paymentProducts.4101.divider">または</string>
 	<string name="gc.general.paymentProducts.4101.introduction">お支払い方法はどうなさいますか？</string>
@@ -412,7 +412,7 @@
 	<string name="gc.general.paymentProducts.4101.payWithVPALabel">Virtual Payment Address（VPA）を入力し、支払うボタンを押します</string>
 	<string name="gc.general.paymentProducts.4101.processing">お支払いを処理中です。UPIアカウントをご確認ください。</string>
 	<string name="gc.general.paymentProducts.4101.qrCodeLabel">または携帯のアプリを開いて、［支払う］をクリックしてQRコードをスキャンします。</string>
-	<string name="gc.general.paymentProducts.4101.qrCodeLabelNoButton">QRコードをスキャンして決済を完了します</string>
+	<string name="gc.general.paymentProducts.4101.qrCodeLabel.noButton">QRコードをスキャンして決済を完了します</string>
 	<string name="gc.general.paymentProducts.4101.refreshPaymentButtonText">お支払い状況を更新する</string>
 	<string name="gc.general.paymentProducts.4101.refreshPaymentLabel">下のボタンをクリックしてお支払い状況を更新します。</string>
 	<string name="gc.general.paymentProducts.4102.name">eNACH</string>

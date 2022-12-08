@@ -401,8 +401,8 @@
 	<string name="gc.general.paymentProducts.320.preparing">Se pregătește Google Pay</string>
 	<string name="gc.general.paymentProducts.3201.name">PostFinance Card</string>
 	<string name="gc.general.paymentProducts.3202.name">PostFinance e-finance</string>
-	<string name="gc.general.paymentProducts.4001.name">RuPay credit</string>
-	<string name="gc.general.paymentProducts.4002.name">RuPay debit</string>
+	<string name="gc.general.paymentProducts.4001.name">RuPay Credit</string>
+	<string name="gc.general.paymentProducts.4002.name">RuPay Debit</string>
 	<string name="gc.general.paymentProducts.402.name">e-Przelewy</string>
 	<string name="gc.general.paymentProducts.4101.divider">Sau</string>
 	<string name="gc.general.paymentProducts.4101.introduction">Cum doriţi să plătiţi?</string>
@@ -412,7 +412,7 @@
 	<string name="gc.general.paymentProducts.4101.payWithVPALabel">Furnizați adresa virtuală de plată (VPA) și apăsați „plată”</string>
 	<string name="gc.general.paymentProducts.4101.processing">Plata dvs. este în curs de procesare. Verificați-vă contul UPI.</string>
 	<string name="gc.general.paymentProducts.4101.qrCodeLabel">Sau deschideţi aplicaţia pe telefon, faceţi clic pe „Plăteşte” şi scanaţi codul QR.</string>
-	<string name="gc.general.paymentProducts.4101.qrCodeLabelNoButton">Scanați codul QR pentru a finaliza plata</string>
+	<string name="gc.general.paymentProducts.4101.qrCodeLabel.noButton">Scanați codul QR pentru a finaliza plata</string>
 	<string name="gc.general.paymentProducts.4101.refreshPaymentButtonText">Reactualizare status plată</string>
 	<string name="gc.general.paymentProducts.4101.refreshPaymentLabel">Clic pe butonul de mai jos pentru reactualizarea statusului plăţii.</string>
 	<string name="gc.general.paymentProducts.4102.name">eNACH</string>

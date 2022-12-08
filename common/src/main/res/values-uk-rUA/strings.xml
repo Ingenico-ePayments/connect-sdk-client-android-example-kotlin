@@ -401,8 +401,8 @@
 	<string name="gc.general.paymentProducts.320.preparing">Підготовка Google Pay</string>
 	<string name="gc.general.paymentProducts.3201.name">PostFinance Card</string>
 	<string name="gc.general.paymentProducts.3202.name">PostFinance e-finance</string>
-	<string name="gc.general.paymentProducts.4001.name">RuPay credit</string>
-	<string name="gc.general.paymentProducts.4002.name">RuPay debit</string>
+	<string name="gc.general.paymentProducts.4001.name">RuPay Credit</string>
+	<string name="gc.general.paymentProducts.4002.name">RuPay Debit</string>
 	<string name="gc.general.paymentProducts.402.name">e-Przelewy</string>
 	<string name="gc.general.paymentProducts.4101.divider">або</string>
 	<string name="gc.general.paymentProducts.4101.introduction">Як ви хочете оплатити?</string>
@@ -412,7 +412,7 @@
 	<string name="gc.general.paymentProducts.4101.payWithVPALabel">Вкажіть свою адресу для віртуальних платежів (VPA) та натисніть «Сплатити»</string>
 	<string name="gc.general.paymentProducts.4101.processing">Ваш платіж обробляється. Перевірте свій обліковий запис UPI.</string>
 	<string name="gc.general.paymentProducts.4101.qrCodeLabel">Або відкрийте додаток на телефоні, натисніть кнопку «Оплатити» та відскануйте QR-код.</string>
-	<string name="gc.general.paymentProducts.4101.qrCodeLabelNoButton">Щоб завершити оплату, відскануйте QR-код</string>
+	<string name="gc.general.paymentProducts.4101.qrCodeLabel.noButton">Щоб завершити оплату, відскануйте QR-код</string>
 	<string name="gc.general.paymentProducts.4101.refreshPaymentButtonText">Оновити статус платежу</string>
 	<string name="gc.general.paymentProducts.4101.refreshPaymentLabel">Натисніть кнопку нижче, щоб оновити статус платежу.</string>
 	<string name="gc.general.paymentProducts.4102.name">eNACH</string>

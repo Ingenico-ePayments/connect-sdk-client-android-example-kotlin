@@ -401,8 +401,8 @@
 	<string name="gc.general.paymentProducts.320.preparing">Forbereder Google Pay</string>
 	<string name="gc.general.paymentProducts.3201.name">PostFinance Card</string>
 	<string name="gc.general.paymentProducts.3202.name">PostFinance e-finance</string>
-	<string name="gc.general.paymentProducts.4001.name">RuPay credit</string>
-	<string name="gc.general.paymentProducts.4002.name">RuPay debit</string>
+	<string name="gc.general.paymentProducts.4001.name">RuPay Credit</string>
+	<string name="gc.general.paymentProducts.4002.name">RuPay Debit</string>
 	<string name="gc.general.paymentProducts.402.name">e-Przelewy</string>
 	<string name="gc.general.paymentProducts.4101.divider">eller</string>
 	<string name="gc.general.paymentProducts.4101.introduction">Hvordan ønsker du at betale?</string>
@@ -412,7 +412,7 @@
 	<string name="gc.general.paymentProducts.4101.payWithVPALabel">Angiv din virtuelle betalingsadresse (VPA), og tryk på Betal</string>
 	<string name="gc.general.paymentProducts.4101.processing">Din betaling er ved at blive behandlet Tjek venligst din UPI-konto</string>
 	<string name="gc.general.paymentProducts.4101.qrCodeLabel">Eller åbn app´en på din telefon, klik "Betal" og scan QR-koden.</string>
-	<string name="gc.general.paymentProducts.4101.qrCodeLabelNoButton">Scan QR-koden for at gennemføre betalingen</string>
+	<string name="gc.general.paymentProducts.4101.qrCodeLabel.noButton">Scan QR-koden for at gennemføre betalingen</string>
 	<string name="gc.general.paymentProducts.4101.refreshPaymentButtonText">Aktualisering af betalingsstatus</string>
 	<string name="gc.general.paymentProducts.4101.refreshPaymentLabel">Klik på knappen nedenfor for at aktualisere din betalingsstatus.</string>
 	<string name="gc.general.paymentProducts.4102.name">eNACH</string>

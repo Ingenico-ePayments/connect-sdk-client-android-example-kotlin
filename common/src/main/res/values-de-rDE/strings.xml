@@ -401,8 +401,8 @@
 	<string name="gc.general.paymentProducts.320.preparing">Google Pay vorbereiten</string>
 	<string name="gc.general.paymentProducts.3201.name">PostFinance Card</string>
 	<string name="gc.general.paymentProducts.3202.name">PostFinance e-finance</string>
-	<string name="gc.general.paymentProducts.4001.name">RuPay credit</string>
-	<string name="gc.general.paymentProducts.4002.name">RuPay debit</string>
+	<string name="gc.general.paymentProducts.4001.name">RuPay Credit</string>
+	<string name="gc.general.paymentProducts.4002.name">RuPay Debit</string>
 	<string name="gc.general.paymentProducts.402.name">e-Przelewy</string>
 	<string name="gc.general.paymentProducts.4101.divider">Oder</string>
 	<string name="gc.general.paymentProducts.4101.introduction">Wie möchten Sie gerne bezahlen?</string>
@@ -412,7 +412,7 @@
 	<string name="gc.general.paymentProducts.4101.payWithVPALabel">Geben Sie Ihre virtuelle Zahlungsadresse (VPA) an und drücken Sie auf „Bezahlen“</string>
 	<string name="gc.general.paymentProducts.4101.processing">Ihre Zahlung wird verarbeitet. Überprüfen Sie bitte Ihr UPI-Konto.</string>
 	<string name="gc.general.paymentProducts.4101.qrCodeLabel">Oder die App auf Ihrem Handy öffnen, auf „Pay“ klicken und den QR-Code einscannen.</string>
-	<string name="gc.general.paymentProducts.4101.qrCodeLabelNoButton">Scannen Sie den QR-Code ein, um Ihre Zahlung fertigzustellen</string>
+	<string name="gc.general.paymentProducts.4101.qrCodeLabel.noButton">Scannen Sie den QR-Code ein, um Ihre Zahlung fertigzustellen</string>
 	<string name="gc.general.paymentProducts.4101.refreshPaymentButtonText">Zahlstatus aktualisieren</string>
 	<string name="gc.general.paymentProducts.4101.refreshPaymentLabel">Nachstehende Schaltfläche anklicken, um Ihren Zahlstatus zu aktualisieren.</string>
 	<string name="gc.general.paymentProducts.4102.name">eNACH</string>

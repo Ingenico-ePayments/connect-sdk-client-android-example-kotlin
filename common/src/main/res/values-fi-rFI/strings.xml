@@ -401,8 +401,8 @@
 	<string name="gc.general.paymentProducts.320.preparing">Valmistellaan Google Payta</string>
 	<string name="gc.general.paymentProducts.3201.name">PostFinance Card</string>
 	<string name="gc.general.paymentProducts.3202.name">PostFinance e-finance</string>
-	<string name="gc.general.paymentProducts.4001.name">RuPay credit</string>
-	<string name="gc.general.paymentProducts.4002.name">RuPay debit</string>
+	<string name="gc.general.paymentProducts.4001.name">RuPay Credit</string>
+	<string name="gc.general.paymentProducts.4002.name">RuPay Debit</string>
 	<string name="gc.general.paymentProducts.402.name">e-Przelewy</string>
 	<string name="gc.general.paymentProducts.4101.divider">tai</string>
 	<string name="gc.general.paymentProducts.4101.introduction">Miten haluat maksaa?</string>
@@ -412,7 +412,7 @@
 	<string name="gc.general.paymentProducts.4101.payWithVPALabel">Anna Virtual Payment Address (VPA) ja paina maksa</string>
 	<string name="gc.general.paymentProducts.4101.processing">Maksuasi käsitellään. Tarkasta UPI-tilisi.</string>
 	<string name="gc.general.paymentProducts.4101.qrCodeLabel">Tai avaa sovellus puhelimessasi, napsauta "Maksa" ja skannaa QR-koodi.</string>
-	<string name="gc.general.paymentProducts.4101.qrCodeLabelNoButton">Suorita maksu loppuun skannaamalla QR-koodi</string>
+	<string name="gc.general.paymentProducts.4101.qrCodeLabel.noButton">Suorita maksu loppuun skannaamalla QR-koodi</string>
 	<string name="gc.general.paymentProducts.4101.refreshPaymentButtonText">Päivitä maksun tila</string>
 	<string name="gc.general.paymentProducts.4101.refreshPaymentLabel">Päivitä maksun tila napsauttamalla alla olevaa painiketta.</string>
 	<string name="gc.general.paymentProducts.4102.name">eNACH</string>

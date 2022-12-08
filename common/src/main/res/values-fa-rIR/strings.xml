@@ -401,8 +401,8 @@
 	<string name="gc.general.paymentProducts.320.preparing">آماده کردن Google Pay</string>
 	<string name="gc.general.paymentProducts.3201.name">PostFinance Card</string>
 	<string name="gc.general.paymentProducts.3202.name">PostFinance e-finance</string>
-	<string name="gc.general.paymentProducts.4001.name">RuPay credit</string>
-	<string name="gc.general.paymentProducts.4002.name">RuPay debit</string>
+	<string name="gc.general.paymentProducts.4001.name">RuPay Credit</string>
+	<string name="gc.general.paymentProducts.4002.name">RuPay Debit</string>
 	<string name="gc.general.paymentProducts.402.name">e-Przelewy</string>
 	<string name="gc.general.paymentProducts.4101.divider">یا</string>
 	<string name="gc.general.paymentProducts.4101.introduction">چگونه می‌خواهید پرداخت کنید؟</string>
@@ -412,7 +412,7 @@
 	<string name="gc.general.paymentProducts.4101.payWithVPALabel">Virtual Payment Address (VPA) خود را ارائه کرده و پرداخت را فشار دهید</string>
 	<string name="gc.general.paymentProducts.4101.processing">پرداخت شما در حال پردازش است. لطفاً حساب UPI خود را چک کنید.</string>
 	<string name="gc.general.paymentProducts.4101.qrCodeLabel">یا برنامه را در تلفن خود باز کنید و بر روی گزینه Pay (پرداخت) کلیک نموده سپس کد QR را اسکن کنید.</string>
-	<string name="gc.general.paymentProducts.4101.qrCodeLabelNoButton">برای تکمیل پرداخت کد QR را اسکن کنید</string>
+	<string name="gc.general.paymentProducts.4101.qrCodeLabel.noButton">برای تکمیل پرداخت کد QR را اسکن کنید</string>
 	<string name="gc.general.paymentProducts.4101.refreshPaymentButtonText">بازآوری وضعیت پرداخت</string>
 	<string name="gc.general.paymentProducts.4101.refreshPaymentLabel">برای بازآوری وضعیت پرداخت خود، بر روی دکمه زیر کلیک کنید.</string>
 	<string name="gc.general.paymentProducts.4102.name">eNACH</string>

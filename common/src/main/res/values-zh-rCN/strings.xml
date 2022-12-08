@@ -401,8 +401,8 @@
 	<string name="gc.general.paymentProducts.320.preparing">正在准备 Google Pay</string>
 	<string name="gc.general.paymentProducts.3201.name">PostFinance Card</string>
 	<string name="gc.general.paymentProducts.3202.name">PostFinance e-finance</string>
-	<string name="gc.general.paymentProducts.4001.name">RuPay credit</string>
-	<string name="gc.general.paymentProducts.4002.name">RuPay debit</string>
+	<string name="gc.general.paymentProducts.4001.name">RuPay Credit</string>
+	<string name="gc.general.paymentProducts.4002.name">RuPay Debit</string>
 	<string name="gc.general.paymentProducts.402.name">e-Przelewy</string>
 	<string name="gc.general.paymentProducts.4101.divider">或</string>
 	<string name="gc.general.paymentProducts.4101.introduction">您想如何付款？</string>
@@ -412,7 +412,7 @@
 	<string name="gc.general.paymentProducts.4101.payWithVPALabel">提供您的Virtual Payment Address（VPA）并点击付款</string>
 	<string name="gc.general.paymentProducts.4101.processing">您的付款正在处理中。请检查您的UPI帐户。</string>
 	<string name="gc.general.paymentProducts.4101.qrCodeLabel">或打开手机中的应用程序，点击“付款”并扫描二维码。</string>
-	<string name="gc.general.paymentProducts.4101.qrCodeLabelNoButton">扫描二维码完成支付</string>
+	<string name="gc.general.paymentProducts.4101.qrCodeLabel.noButton">扫描二维码完成支付</string>
 	<string name="gc.general.paymentProducts.4101.refreshPaymentButtonText">刷新付款状态</string>
 	<string name="gc.general.paymentProducts.4101.refreshPaymentLabel">点击以下按钮刷新您的付款状态。</string>
 	<string name="gc.general.paymentProducts.4102.name">eNACH</string>

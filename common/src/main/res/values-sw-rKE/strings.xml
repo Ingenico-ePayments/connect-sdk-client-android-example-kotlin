@@ -401,8 +401,8 @@
 	<string name="gc.general.paymentProducts.320.preparing">Inapakia Google Pay</string>
 	<string name="gc.general.paymentProducts.3201.name">PostFinance Card</string>
 	<string name="gc.general.paymentProducts.3202.name">PostFinance e-finance</string>
-	<string name="gc.general.paymentProducts.4001.name">RuPay credit</string>
-	<string name="gc.general.paymentProducts.4002.name">RuPay debit</string>
+	<string name="gc.general.paymentProducts.4001.name">RuPay Credit</string>
+	<string name="gc.general.paymentProducts.4002.name">RuPay Debit</string>
 	<string name="gc.general.paymentProducts.402.name">e-Przelewy</string>
 	<string name="gc.general.paymentProducts.4101.divider">Au</string>
 	<string name="gc.general.paymentProducts.4101.introduction">Ungependa kulipa aje?</string>
@@ -412,7 +412,7 @@
 	<string name="gc.general.paymentProducts.4101.payWithVPALabel">Toa Virtual Payment Address (VPA) yako na ubonyeze lipa</string>
 	<string name="gc.general.paymentProducts.4101.processing">Malipo yako yanachakatwa. Tafadhali angalia akaunti yako ya UPI.</string>
 	<string name="gc.general.paymentProducts.4101.qrCodeLabel">Au fungua programu kwenye simu yako, bofya ‘Lipa’ na uchanganue msimbo wa QR.</string>
-	<string name="gc.general.paymentProducts.4101.qrCodeLabelNoButton">Tambaza msimbo wa QR ili kukamilisha malipo</string>
+	<string name="gc.general.paymentProducts.4101.qrCodeLabel.noButton">Tambaza msimbo wa QR ili kukamilisha malipo</string>
 	<string name="gc.general.paymentProducts.4101.refreshPaymentButtonText">Onyesha upya hali ya malipo</string>
 	<string name="gc.general.paymentProducts.4101.refreshPaymentLabel">Bofya kitufe hapa chini ili uonyeshe upya hali yako ya malipo.</string>
 	<string name="gc.general.paymentProducts.4102.name">eNACH</string>

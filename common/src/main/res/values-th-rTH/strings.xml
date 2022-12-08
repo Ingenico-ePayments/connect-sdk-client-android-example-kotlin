@@ -401,8 +401,8 @@
 	<string name="gc.general.paymentProducts.320.preparing">กำลังเปิด Google Pay</string>
 	<string name="gc.general.paymentProducts.3201.name">PostFinance Card</string>
 	<string name="gc.general.paymentProducts.3202.name">PostFinance e-finance</string>
-	<string name="gc.general.paymentProducts.4001.name">RuPay credit</string>
-	<string name="gc.general.paymentProducts.4002.name">RuPay debit</string>
+	<string name="gc.general.paymentProducts.4001.name">RuPay Credit</string>
+	<string name="gc.general.paymentProducts.4002.name">RuPay Debit</string>
 	<string name="gc.general.paymentProducts.402.name">e-Przelewy</string>
 	<string name="gc.general.paymentProducts.4101.divider">หรือ</string>
 	<string name="gc.general.paymentProducts.4101.introduction">คุณต้องการชำระเงินอย่างไร</string>
@@ -412,7 +412,7 @@
 	<string name="gc.general.paymentProducts.4101.payWithVPALabel">ระบุ Virtual Payment Address (VPA) ของคุณแล้วกดชำระเงิน</string>
 	<string name="gc.general.paymentProducts.4101.processing">กำลังดำเนินการชำระเงินของคุณ โปรดตรวจสอบบัญชี UPI ของคุณ</string>
 	<string name="gc.general.paymentProducts.4101.qrCodeLabel">หรือเปิดแอปพลิเคชันบนโทรศัพท์ของคุณ คลิกคำว่า "ชำระเงิน" และสแกนรหัสคิวอาร์</string>
-	<string name="gc.general.paymentProducts.4101.qrCodeLabelNoButton">สแกนคิวอาร์โค้ดเพื่อชำระเงิน</string>
+	<string name="gc.general.paymentProducts.4101.qrCodeLabel.noButton">สแกนคิวอาร์โค้ดเพื่อชำระเงิน</string>
 	<string name="gc.general.paymentProducts.4101.refreshPaymentButtonText">รีเฟรชสถานะการชำระเงิน</string>
 	<string name="gc.general.paymentProducts.4101.refreshPaymentLabel">คลิกปุ่มด้านล่างเพื่อรีเพรชสถานะการชำระเงินของคุณ</string>
 	<string name="gc.general.paymentProducts.4102.name">eNACH</string>

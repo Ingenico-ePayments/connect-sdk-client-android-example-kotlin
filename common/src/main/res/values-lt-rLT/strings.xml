@@ -401,8 +401,8 @@
 	<string name="gc.general.paymentProducts.320.preparing">Ruošiama „Google Pay“</string>
 	<string name="gc.general.paymentProducts.3201.name">PostFinance Card</string>
 	<string name="gc.general.paymentProducts.3202.name">PostFinance e-finance</string>
-	<string name="gc.general.paymentProducts.4001.name">RuPay credit</string>
-	<string name="gc.general.paymentProducts.4002.name">RuPay debit</string>
+	<string name="gc.general.paymentProducts.4001.name">RuPay Credit</string>
+	<string name="gc.general.paymentProducts.4002.name">RuPay Debit</string>
 	<string name="gc.general.paymentProducts.402.name">e-Przelewy</string>
 	<string name="gc.general.paymentProducts.4101.divider">arba</string>
 	<string name="gc.general.paymentProducts.4101.introduction">Kokiu būdu norėtumėte mokėti?</string>
@@ -412,7 +412,7 @@
 	<string name="gc.general.paymentProducts.4101.payWithVPALabel">Įveskite savo virtualų mokėjimo adresą (VPA) ir paspauskite „Mokėti“</string>
 	<string name="gc.general.paymentProducts.4101.processing">Jūsų mokėjimas apdorojamas. Patikrinkite savo UPI paskyrą.</string>
 	<string name="gc.general.paymentProducts.4101.qrCodeLabel">Arba atidarykite programėlę telefone, paspauskite „Pay“ (mokėti) ir nuskaitykite QR kodą.</string>
-	<string name="gc.general.paymentProducts.4101.qrCodeLabelNoButton">Nuskenuokite QR kodą mokėjimui užbaigti</string>
+	<string name="gc.general.paymentProducts.4101.qrCodeLabel.noButton">Nuskenuokite QR kodą mokėjimui užbaigti</string>
 	<string name="gc.general.paymentProducts.4101.refreshPaymentButtonText">Atnaujinkite mokėjimo būseną</string>
 	<string name="gc.general.paymentProducts.4101.refreshPaymentLabel">Paspauskite žemiau esantį mygtuką, kad atnaujintumėte mokėjimo būseną.</string>
 	<string name="gc.general.paymentProducts.4102.name">eNACH</string>

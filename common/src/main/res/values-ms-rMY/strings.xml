@@ -401,8 +401,8 @@
 	<string name="gc.general.paymentProducts.320.preparing">Menyediakan Google Pay</string>
 	<string name="gc.general.paymentProducts.3201.name">PostFinance Card</string>
 	<string name="gc.general.paymentProducts.3202.name">PostFinance e-finance</string>
-	<string name="gc.general.paymentProducts.4001.name">RuPay credit</string>
-	<string name="gc.general.paymentProducts.4002.name">RuPay debit</string>
+	<string name="gc.general.paymentProducts.4001.name">RuPay Credit</string>
+	<string name="gc.general.paymentProducts.4002.name">RuPay Debit</string>
 	<string name="gc.general.paymentProducts.402.name">e-Przelewy</string>
 	<string name="gc.general.paymentProducts.4101.divider">Atau</string>
 	<string name="gc.general.paymentProducts.4101.introduction">Bagaimanakah anda ingin membuat pembayaran?</string>
@@ -412,7 +412,7 @@
 	<string name="gc.general.paymentProducts.4101.payWithVPALabel">Berikan Virtual Payment Address (VPA) anda dan tekan bayar</string>
 	<string name="gc.general.paymentProducts.4101.processing">Pembayaran anda sedang diproses. Sila semak akaun UPI anda.</string>
 	<string name="gc.general.paymentProducts.4101.qrCodeLabel">Atau buka aplikasi pada telefon anda, klik \'Bayar\' dan imbas kod QR.</string>
-	<string name="gc.general.paymentProducts.4101.qrCodeLabelNoButton">Imbas kod QR untuk melengkapkan pembayaran tersebut</string>
+	<string name="gc.general.paymentProducts.4101.qrCodeLabel.noButton">Imbas kod QR untuk melengkapkan pembayaran tersebut</string>
 	<string name="gc.general.paymentProducts.4101.refreshPaymentButtonText">Muat semula status pembayaran</string>
 	<string name="gc.general.paymentProducts.4101.refreshPaymentLabel">Klik butang di bawah untuk memuatkan semula status pembayaran anda.</string>
 	<string name="gc.general.paymentProducts.4102.name">eNACH</string>

@@ -401,8 +401,8 @@
 	<string name="gc.general.paymentProducts.320.preparing">Google Pay hazırlanıyor</string>
 	<string name="gc.general.paymentProducts.3201.name">PostFinance Card</string>
 	<string name="gc.general.paymentProducts.3202.name">PostFinance e-finance</string>
-	<string name="gc.general.paymentProducts.4001.name">RuPay credit</string>
-	<string name="gc.general.paymentProducts.4002.name">RuPay debit</string>
+	<string name="gc.general.paymentProducts.4001.name">RuPay Credit</string>
+	<string name="gc.general.paymentProducts.4002.name">RuPay Debit</string>
 	<string name="gc.general.paymentProducts.402.name">e-Przelewy</string>
 	<string name="gc.general.paymentProducts.4101.divider">Veya</string>
 	<string name="gc.general.paymentProducts.4101.introduction">Nasıl ödemek istersiniz?</string>
@@ -412,7 +412,7 @@
 	<string name="gc.general.paymentProducts.4101.payWithVPALabel">Sanal Ödeme Adresinizi (VPA) girin ve öde seçeneğine basın</string>
 	<string name="gc.general.paymentProducts.4101.processing">Ödemeniz işleme alınıyor. Lütfen UPI hesabınızı kontrol edin.</string>
 	<string name="gc.general.paymentProducts.4101.qrCodeLabel">Veya telefonunuzdaki uygulamayı açın, “Öde” seçeneğine tıklayın ve QR kodunu tarayın.</string>
-	<string name="gc.general.paymentProducts.4101.qrCodeLabelNoButton">Ödemeyi tamamlamak için QR kodunu tarayın</string>
+	<string name="gc.general.paymentProducts.4101.qrCodeLabel.noButton">Ödemeyi tamamlamak için QR kodunu tarayın</string>
 	<string name="gc.general.paymentProducts.4101.refreshPaymentButtonText">Ödeme durumunu yenileyin</string>
 	<string name="gc.general.paymentProducts.4101.refreshPaymentLabel">Ödeme durumunuzu yenilemek için aşağıdaki düğmeyi tıklayın.</string>
 	<string name="gc.general.paymentProducts.4102.name">eNACH</string>

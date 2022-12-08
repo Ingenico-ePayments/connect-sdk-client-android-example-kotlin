@@ -401,8 +401,8 @@
 	<string name="gc.general.paymentProducts.320.preparing">Priprema usluge Google Pay</string>
 	<string name="gc.general.paymentProducts.3201.name">PostFinance Card</string>
 	<string name="gc.general.paymentProducts.3202.name">PostFinance e-finance</string>
-	<string name="gc.general.paymentProducts.4001.name">RuPay credit</string>
-	<string name="gc.general.paymentProducts.4002.name">RuPay debit</string>
+	<string name="gc.general.paymentProducts.4001.name">RuPay Credit</string>
+	<string name="gc.general.paymentProducts.4002.name">RuPay Debit</string>
 	<string name="gc.general.paymentProducts.402.name">e-Przelewy</string>
 	<string name="gc.general.paymentProducts.4101.divider">Ili</string>
 	<string name="gc.general.paymentProducts.4101.introduction">Kako želite platiti?</string>
@@ -412,7 +412,7 @@
 	<string name="gc.general.paymentProducts.4101.payWithVPALabel">Unesite svoj Virtual Payment Address (VPA) i kliknite Plati</string>
 	<string name="gc.general.paymentProducts.4101.processing">Vaša se uplata obrađuje. Provjerite svoj UPI račun.</string>
 	<string name="gc.general.paymentProducts.4101.qrCodeLabel">Ili otvorite aplikaciju na svojem mobitelu, odaberite oznaku „Pay” („Plati”) i skenirajte QR kôd.</string>
-	<string name="gc.general.paymentProducts.4101.qrCodeLabelNoButton">Skenirajte QR kôd da biste dovršili plaćanje</string>
+	<string name="gc.general.paymentProducts.4101.qrCodeLabel.noButton">Skenirajte QR kôd da biste dovršili plaćanje</string>
 	<string name="gc.general.paymentProducts.4101.refreshPaymentButtonText">Osvježite status plaćanja</string>
 	<string name="gc.general.paymentProducts.4101.refreshPaymentLabel">Odaberite donji gumb za osvježenje statusa plaćanja.</string>
 	<string name="gc.general.paymentProducts.4102.name">eNACH</string>

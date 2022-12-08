@@ -401,8 +401,8 @@
 	<string name="gc.general.paymentProducts.320.preparing">מכין את Google Pay</string>
 	<string name="gc.general.paymentProducts.3201.name">PostFinance Card</string>
 	<string name="gc.general.paymentProducts.3202.name">PostFinance e-finance</string>
-	<string name="gc.general.paymentProducts.4001.name">RuPay credit</string>
-	<string name="gc.general.paymentProducts.4002.name">RuPay debit</string>
+	<string name="gc.general.paymentProducts.4001.name">RuPay Credit</string>
+	<string name="gc.general.paymentProducts.4002.name">RuPay Debit</string>
 	<string name="gc.general.paymentProducts.402.name">e-Przelewy</string>
 	<string name="gc.general.paymentProducts.4101.divider">לחלופין,</string>
 	<string name="gc.general.paymentProducts.4101.introduction">כיצד תרצה לשלם?</string>
@@ -412,7 +412,7 @@
 	<string name="gc.general.paymentProducts.4101.payWithVPALabel">הקלד את ה-Virtual Payment Address (‏VPA) שלך ולחץ על "שלם"</string>
 	<string name="gc.general.paymentProducts.4101.processing">התשלום שלך מעובד כעת. בדוק את חשבון UPI שלך.</string>
 	<string name="gc.general.paymentProducts.4101.qrCodeLabel">לחלופין, פתח את האפליקציה בטלפון, לחץ על Pay (תשלום), וסרוק את קוד ה-QR.</string>
-	<string name="gc.general.paymentProducts.4101.qrCodeLabelNoButton">לסיום התשלום, סרוק את קוד QR</string>
+	<string name="gc.general.paymentProducts.4101.qrCodeLabel.noButton">לסיום התשלום, סרוק את קוד QR</string>
 	<string name="gc.general.paymentProducts.4101.refreshPaymentButtonText">רענן מצב תשלום</string>
 	<string name="gc.general.paymentProducts.4101.refreshPaymentLabel">לחץ על הלחצן למטה כדי לרענן את מצב התשלום.</string>
 	<string name="gc.general.paymentProducts.4102.name">eNACH</string>

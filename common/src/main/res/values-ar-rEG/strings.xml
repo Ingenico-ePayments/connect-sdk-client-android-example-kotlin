@@ -401,8 +401,8 @@
 	<string name="gc.general.paymentProducts.320.preparing">إعداد Google Pay</string>
 	<string name="gc.general.paymentProducts.3201.name">PostFinance Card</string>
 	<string name="gc.general.paymentProducts.3202.name">PostFinance e-finance</string>
-	<string name="gc.general.paymentProducts.4001.name">RuPay credit</string>
-	<string name="gc.general.paymentProducts.4002.name">RuPay debit</string>
+	<string name="gc.general.paymentProducts.4001.name">RuPay Credit</string>
+	<string name="gc.general.paymentProducts.4002.name">RuPay Debit</string>
 	<string name="gc.general.paymentProducts.402.name">e-Przelewy</string>
 	<string name="gc.general.paymentProducts.4101.divider">أو</string>
 	<string name="gc.general.paymentProducts.4101.introduction">كيف تحب أن تدفع؟</string>
@@ -412,7 +412,7 @@
 	<string name="gc.general.paymentProducts.4101.payWithVPALabel">أدخل عنوان الدفع الافتراضي (VPA) واضغط على "دفع"</string>
 	<string name="gc.general.paymentProducts.4101.processing">يجري حاليًا إتمام عملية الدفع. يُرجى مراجعة حساب UPI الخاص بك.</string>
 	<string name="gc.general.paymentProducts.4101.qrCodeLabel">أو افتح التطبيق على هاتفك وانقر فوق "دفع" وقم بالمسح الضوئي لكود الاستجابة السريعة.</string>
-	<string name="gc.general.paymentProducts.4101.qrCodeLabelNoButton">امسح رمز الاستجابة السريعة ضوئيًا لاستكمال عملية الدفع</string>
+	<string name="gc.general.paymentProducts.4101.qrCodeLabel.noButton">امسح رمز الاستجابة السريعة ضوئيًا لاستكمال عملية الدفع</string>
 	<string name="gc.general.paymentProducts.4101.refreshPaymentButtonText">تحديث حالة الدفع</string>
 	<string name="gc.general.paymentProducts.4101.refreshPaymentLabel">انقر فوق الزر أدناه لتحديث حالة الدفع الخاصة بك.</string>
 	<string name="gc.general.paymentProducts.4102.name">eNACH</string>

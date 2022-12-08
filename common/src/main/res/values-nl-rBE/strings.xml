@@ -401,8 +401,8 @@
 	<string name="gc.general.paymentProducts.320.preparing">Google Pay voorbereiden</string>
 	<string name="gc.general.paymentProducts.3201.name">PostFinance Card</string>
 	<string name="gc.general.paymentProducts.3202.name">PostFinance e-finance</string>
-	<string name="gc.general.paymentProducts.4001.name">RuPay credit</string>
-	<string name="gc.general.paymentProducts.4002.name">RuPay debit</string>
+	<string name="gc.general.paymentProducts.4001.name">RuPay Credit</string>
+	<string name="gc.general.paymentProducts.4002.name">RuPay Debit</string>
 	<string name="gc.general.paymentProducts.402.name">e-Przelewy</string>
 	<string name="gc.general.paymentProducts.4101.divider">Of</string>
 	<string name="gc.general.paymentProducts.4101.introduction">Hoe wilt u betalen?</string>
@@ -412,7 +412,7 @@
 	<string name="gc.general.paymentProducts.4101.payWithVPALabel">Geef uw Virtual Payment Address (VPA) op en druk op Betalen</string>
 	<string name="gc.general.paymentProducts.4101.processing">Uw betaling wordt verwerkt. Controleer uw UPI-account.</string>
 	<string name="gc.general.paymentProducts.4101.qrCodeLabel">Of open de app op uw telefoon, klik op ‘Betalen’ en scan de QR code.</string>
-	<string name="gc.general.paymentProducts.4101.qrCodeLabelNoButton">Scan de QR-code om de betaling te voltooien</string>
+	<string name="gc.general.paymentProducts.4101.qrCodeLabel.noButton">Scan de QR-code om de betaling te voltooien</string>
 	<string name="gc.general.paymentProducts.4101.refreshPaymentButtonText">Betaalstatus vernieuwen</string>
 	<string name="gc.general.paymentProducts.4101.refreshPaymentLabel">Klik op de onderstaande knop om uw betaalstatus te vernieuwen.</string>
 	<string name="gc.general.paymentProducts.4102.name">eNACH</string>

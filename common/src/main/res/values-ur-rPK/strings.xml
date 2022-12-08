@@ -401,8 +401,8 @@
 	<string name="gc.general.paymentProducts.320.preparing">Google Pay تیار ہو رہا ہے</string>
 	<string name="gc.general.paymentProducts.3201.name">PostFinance Card</string>
 	<string name="gc.general.paymentProducts.3202.name">PostFinance e-finance</string>
-	<string name="gc.general.paymentProducts.4001.name">RuPay credit</string>
-	<string name="gc.general.paymentProducts.4002.name">RuPay debit</string>
+	<string name="gc.general.paymentProducts.4001.name">RuPay Credit</string>
+	<string name="gc.general.paymentProducts.4002.name">RuPay Debit</string>
 	<string name="gc.general.paymentProducts.402.name">e-Przelewy</string>
 	<string name="gc.general.paymentProducts.4101.divider">یا</string>
 	<string name="gc.general.paymentProducts.4101.introduction">آپ کس طرح ادا کرنا پسند کریں گے؟</string>
@@ -412,7 +412,7 @@
 	<string name="gc.general.paymentProducts.4101.payWithVPALabel">اپنا Virtual Payment Address (VPA) فراہم کرنے کے بعد \'ادا کریں\' دبائيں</string>
 	<string name="gc.general.paymentProducts.4101.processing">آپ کی ادائیگی پراسس کی جا رہی ہے۔ براہ کرم اپنا UPI اکاؤنٹ چیک کریں۔</string>
 	<string name="gc.general.paymentProducts.4101.qrCodeLabel">یا اپنے فون پر ایپ کھولیں، ‎‘Pay’‎ (ادا کریں) پر کلک کریں اور QR کوڈ اسکین کریں۔</string>
-	<string name="gc.general.paymentProducts.4101.qrCodeLabelNoButton">ادائیگی مکمل کرنے کے لیے QR کوڈ اسکین کریں</string>
+	<string name="gc.general.paymentProducts.4101.qrCodeLabel.noButton">ادائیگی مکمل کرنے کے لیے QR کوڈ اسکین کریں</string>
 	<string name="gc.general.paymentProducts.4101.refreshPaymentButtonText">ادائیگی کا اسٹیٹس ریفریش کریں</string>
 	<string name="gc.general.paymentProducts.4101.refreshPaymentLabel">اپنی ادائیگی کا اسٹیٹس ریفریش کرنے کے لیے نیچے بٹن پر کلک کریں۔</string>
 	<string name="gc.general.paymentProducts.4102.name">eNACH</string>

@@ -401,8 +401,8 @@
 	<string name="gc.general.paymentProducts.320.preparing">Pripravuje sa služba Google Pay</string>
 	<string name="gc.general.paymentProducts.3201.name">PostFinance Card</string>
 	<string name="gc.general.paymentProducts.3202.name">PostFinance e-finance</string>
-	<string name="gc.general.paymentProducts.4001.name">RuPay credit</string>
-	<string name="gc.general.paymentProducts.4002.name">RuPay debit</string>
+	<string name="gc.general.paymentProducts.4001.name">RuPay Credit</string>
+	<string name="gc.general.paymentProducts.4002.name">RuPay Debit</string>
 	<string name="gc.general.paymentProducts.402.name">e-Przelewy</string>
 	<string name="gc.general.paymentProducts.4101.divider">Alebo</string>
 	<string name="gc.general.paymentProducts.4101.introduction">Ako by ste chceli platiť?</string>
@@ -412,7 +412,7 @@
 	<string name="gc.general.paymentProducts.4101.payWithVPALabel">Zadajte vašu virtuálnu platobnú adresu (VPA) a stlačte tlačidlo Zaplatiť</string>
 	<string name="gc.general.paymentProducts.4101.processing">Vaša platba sa spracováva. Skontrolujte svoj účet UPI.</string>
 	<string name="gc.general.paymentProducts.4101.qrCodeLabel">Alebo otvorte aplikáciu na svojom telefóne. Kliknite na možnosť „Zaplatiť“ a naskenujte QR kód.</string>
-	<string name="gc.general.paymentProducts.4101.qrCodeLabelNoButton">Na ukončenie platby naskenujte QR kód</string>
+	<string name="gc.general.paymentProducts.4101.qrCodeLabel.noButton">Na ukončenie platby naskenujte QR kód</string>
 	<string name="gc.general.paymentProducts.4101.refreshPaymentButtonText">Obnoviť stav platby</string>
 	<string name="gc.general.paymentProducts.4101.refreshPaymentLabel">Kliknite na nižšie uvedené tlačidlo a obnovte si stav platby.</string>
 	<string name="gc.general.paymentProducts.4102.name">eNACH</string>
