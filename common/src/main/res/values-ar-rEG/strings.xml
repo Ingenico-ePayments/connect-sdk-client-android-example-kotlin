@@ -475,6 +475,7 @@
 	<string name="gc.general.paymentProducts.6205.name">PagoEfectivo</string>
 	<string name="gc.general.paymentProducts.6206.name">Santander Cash</string>
 	<string name="gc.general.paymentProducts.6207.name">Interbank</string>
+	<string name="gc.general.paymentProducts.6208.name">Banco Popular</string>
 	<string name="gc.general.paymentProducts.6501.name">SPEI</string>
 	<string name="gc.general.paymentProducts.705.instructionFields.PAYMENTREFERENCE.label">إشارة الدفع الخاصة بك هي</string>
 	<string name="gc.general.paymentProducts.705.instructionFields.REFERENCENUMBER.label">الرقم الإشاري</string>
@@ -492,6 +493,7 @@
 	<string name="gc.general.paymentProducts.801.name">ING Home’Pay</string>
 	<string name="gc.general.paymentProducts.8013.name">Clearpay</string>
 	<string name="gc.general.paymentProducts.8014.name">Afterpay</string>
+	<string name="gc.general.paymentProducts.8015.name">Atome</string>
 	<string name="gc.general.paymentProducts.802.name">Nordea E-payment</string>
 	<string name="gc.general.paymentProducts.805.name">Nordea E-payment</string>
 	<string name="gc.general.paymentProducts.806.name">Trustly</string>
