@@ -76,6 +76,12 @@ class MainActivity : ComponentActivity() {
                 is Status.Failed -> {
                     paymentSharedViewModel.globalErrorMessage.value = paymentProductStatus.throwable.message
                 }
+                is Status.Loading -> {
+                    // No loadingState needed for this fragment
+                }
+                is Status.None -> {
+                    // Init status; nothing to do here
+                }
             }
         }
     }
@@ -86,15 +92,18 @@ class MainActivity : ComponentActivity() {
                 is Status.ApiError -> {
                     paymentSharedViewModel.globalErrorMessage.value = encryptedPaymentRequestStatus.apiError.errors.first().message
                 }
-                is Status.Loading -> {
-                    // No loadingState needed for this fragment google pay has is own loading indicator
-                }
                 is Status.Success -> {
                     val encryptedFieldsData = (encryptedPaymentRequestStatus.data as EncryptedPaymentRequest).encryptedFields
                     paymentSharedViewModel.googlePayData.value = encryptedFieldsData
                 }
                 is  Status.Failed -> {
                     paymentSharedViewModel.globalErrorMessage.value = encryptedPaymentRequestStatus.throwable.message
+                }
+                is Status.Loading -> {
+                    // No loadingState needed for this fragment; Google pay has its own loading indicator
+                }
+                is Status.None -> {
+                    // Init status; nothing to do here
                 }
             }
         }

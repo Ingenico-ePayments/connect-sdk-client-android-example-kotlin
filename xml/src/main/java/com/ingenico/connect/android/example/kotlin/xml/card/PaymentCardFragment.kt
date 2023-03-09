@@ -173,6 +173,9 @@ class PaymentCardFragment : Fragment() {
                     shouldShowFormLoadingIndicator(false)
                     paymentSharedViewModel.globalErrorMessage.value = paymentCardUiState.throwable.message
                 }
+                PaymentCardUiState.None -> {
+                    // Init status; nothing to do here
+                }
             }
         }
     }
@@ -190,6 +193,10 @@ class PaymentCardFragment : Fragment() {
                 is FormValidationResult.Valid -> {
                     binding.btnPaymentCardPayProduct.isButtonEnabled = true
                     setFieldErrors(emptyList())
+                }
+                FormValidationResult.NotValidated -> {
+                    // No option, when form is invalid it will always come in the
+                    // FormValidationResult.InvalidWithValidationErrorMessage case
                 }
             }
         }
@@ -215,6 +222,9 @@ class PaymentCardFragment : Fragment() {
                     paymentSharedViewModel.globalErrorMessage.value = EncryptedPaymentRequestStatus.throwable.message
                     binding.clPaymentCardInputForm.deepForEach { isEnabled = true }
                     binding.btnPaymentCardPayProduct.hideLoadingIndicator()
+                }
+                is Status.None -> {
+                    // Init status; nothing to do here
                 }
             }
         }

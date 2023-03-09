@@ -63,6 +63,13 @@ fun CardScreen(
         is FormValidationResult.Valid -> {
             cardScreenViewModel.setFieldErrors(emptyList())
         }
+        is FormValidationResult.NotValidated -> {
+            cardScreenViewModel.setFieldErrors(emptyList())
+        }
+        is FormValidationResult.Invalid -> {
+            // No option, when form is invalid it will always come in the
+            // FormValidationResult.InvalidWithValidationErrorMessage case
+        }
     }
 
     val encryptedPaymentRequestStatus by paymentCardViewModel.encryptedPaymentRequestStatus.observeAsState(Status.None)
@@ -85,6 +92,12 @@ fun CardScreen(
             navController.navigate("${PaymentScreen.RESULT.route}/$encryptedDataFields"){
                 popUpTo(PaymentScreen.CONFIGURATION.route)
             }
+        }
+        is Status.Failed -> {
+            // Show generic error
+        }
+        is Status.None -> {
+            // Init status; nothing to do here
         }
     }
 
@@ -206,6 +219,13 @@ fun CardContent(
                     },
                     rememberCardValue = { rememberCardValue(it) }
                 )
+            }
+
+            is PaymentCardUiState.None -> {
+                // Init status; nothing to do here
+            }
+            is PaymentCardUiState.Failed -> {
+                // Show generic error
             }
         }
     }

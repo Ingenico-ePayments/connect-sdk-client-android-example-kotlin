@@ -468,6 +468,7 @@
 	<string name="gc.general.paymentProducts.6114.name">BBVA</string>
 	<string name="gc.general.paymentProducts.6115.name">ScotiaBank</string>
 	<string name="gc.general.paymentProducts.6116.name">Santander</string>
+	<string name="gc.general.paymentProducts.6117.name">Caixa</string>
 	<string name="gc.general.paymentProducts.6201.name">OXXO Pay</string>
 	<string name="gc.general.paymentProducts.6202.name">Baloto</string>
 	<string name="gc.general.paymentProducts.6203.name">Efecty</string>
@@ -514,6 +515,14 @@
 	<string name="gc.general.paymentProducts.8580.paymentProductFields.phoneNumber.placeholder">7 *** *** ** **</string>
 	<string name="gc.general.paymentProducts.8583.name">QIWI Doorlopend</string>
 	<string name="gc.general.paymentProducts.8583.paymentProductFields.phoneNumber.placeholder">7 *** *** ** **</string>
+	<string name="gc.general.paymentProducts.8590.name">BC Card</string>
+	<string name="gc.general.paymentProducts.8591.name">KEB Hana Card</string>
+	<string name="gc.general.paymentProducts.8592.name">Hyundai Card</string>
+	<string name="gc.general.paymentProducts.8593.name">KB Kookmin Card</string>
+	<string name="gc.general.paymentProducts.8594.name">Lotte Card</string>
+	<string name="gc.general.paymentProducts.8595.name">NH Card</string>
+	<string name="gc.general.paymentProducts.8596.name">Samsung Card</string>
+	<string name="gc.general.paymentProducts.8597.name">Shinhan Card</string>
 	<string name="gc.general.paymentProducts.861.name">Alipay</string>
 	<string name="gc.general.paymentProducts.863.introduction">Hoe wilt u betalen?</string>
 	<string name="gc.general.paymentProducts.863.name">WeChat Pay</string>

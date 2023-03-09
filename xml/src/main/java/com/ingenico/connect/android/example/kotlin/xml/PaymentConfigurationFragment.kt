@@ -243,6 +243,9 @@ class PaymentConfigurationFragment : Fragment() {
                     paymentSharedViewModel.globalErrorMessage.value =
                         paymentProductStatus.throwable.message
                 }
+                Status.None -> {
+                    // Init status; nothing to do here
+                }
             }
         }
     }

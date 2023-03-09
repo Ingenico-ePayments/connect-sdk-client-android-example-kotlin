@@ -79,7 +79,9 @@ fun ProductContent(
                 onItemClicked = { onItemClicked(it) }
             )
         }
-        is Status.None -> {}
+        is Status.None -> {
+            // Init status; nothing to do here
+        }
         is Status.Failed -> {
             FailedText()
         }

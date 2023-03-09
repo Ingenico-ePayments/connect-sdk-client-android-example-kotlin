@@ -51,7 +51,7 @@ class PaymentSharedViewModel(application: Application) : AndroidViewModel(applic
             getApplication<Application>().applicationContext
         )
             .enableNetworkLogs(true)
-            .preLoadImages(false)
+            .preLoadImages(true)
             .applicationId(APPLICATION_IDENTIFIER)
             .build()
 
