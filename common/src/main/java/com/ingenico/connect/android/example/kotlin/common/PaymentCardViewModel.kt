@@ -15,7 +15,12 @@ import com.ingenico.connect.gateway.sdk.client.android.sdk.model.EncryptedPaymen
 import com.ingenico.connect.gateway.sdk.client.android.sdk.model.PaymentRequest
 import com.ingenico.connect.gateway.sdk.client.android.sdk.model.iin.IinDetailsResponse
 import com.ingenico.connect.gateway.sdk.client.android.sdk.model.iin.IinStatus
-import com.ingenico.connect.gateway.sdk.client.android.sdk.model.paymentproduct.*
+import com.ingenico.connect.gateway.sdk.client.android.sdk.model.paymentproduct.AccountOnFile
+import com.ingenico.connect.gateway.sdk.client.android.sdk.model.paymentproduct.BasicPaymentProduct
+import com.ingenico.connect.gateway.sdk.client.android.sdk.model.paymentproduct.BasicPaymentProductGroup
+import com.ingenico.connect.gateway.sdk.client.android.sdk.model.paymentproduct.PaymentProduct
+import com.ingenico.connect.gateway.sdk.client.android.sdk.model.paymentproduct.PaymentProductField
+import com.ingenico.connect.gateway.sdk.client.android.sdk.model.paymentproduct.PaymentProductGroup
 import com.ingenico.connect.gateway.sdk.client.android.sdk.network.ApiErrorResponse
 
 /**
@@ -32,8 +37,33 @@ class PaymentCardViewModel(application: Application) : AndroidViewModel(applicat
     private var liveFormValidating = false
     val formValidationResult = MutableLiveData<FormValidationResult>()
 
+    private val hasNoEmptyRequiredFields: Boolean
+        get() {
+            var allRequiredFieldsNotEmpty = true
+            if (
+                paymentRequest.paymentProduct != null &&
+                paymentProductFieldsUiState.value is PaymentCardUiState.Success
+            ) {
+                paymentRequest.values.forEach { paymentRequestValues ->
+                    if (paymentRequestValues.value.isNullOrBlank() &&
+                        paymentRequest.paymentProduct.getPaymentProductFieldById(
+                            paymentRequestValues.key
+                        ).dataRestrictions.isRequired
+                    ) {
+                        allRequiredFieldsNotEmpty = false
+                        return@forEach
+                    }
+                }
+            } else {
+                allRequiredFieldsNotEmpty = false
+            }
+
+            return allRequiredFieldsNotEmpty
+        }
+
     /**
-     * Based on the selected payment product, the correct data is retrieved from the SDK and parameters are set correctly.
+     * Based on the selected payment product,
+     * the correct data is retrieved from the SDK and parameters are set correctly.
      */
     fun getPaymentProduct(
         selectedPaymentProduct: Any?,
@@ -60,8 +90,10 @@ class PaymentCardViewModel(application: Application) : AndroidViewModel(applicat
     }
 
     /**
-     * A payment product group has a collection of payment products that can be grouped together on a payment product selection page,
-     * and a set of fields to render on the payment product details page that allow to determine which payment product of the group the consumer wants to select.
+     * A payment product group has a collection of payment products
+     * that can be grouped together on a payment product selection page,
+     * and a set of fields to render on the payment product details page
+     * that allow to determine which payment product of the group the consumer wants to select.
      * We currently support one payment product group named 'cards'.
      */
     private fun getPaymentProductGroup(paymentGroupId: String) {
@@ -94,7 +126,8 @@ class PaymentCardViewModel(application: Application) : AndroidViewModel(applicat
     }
 
     /**
-     * After at least 6 digits have been entered(issuerIdentificationNumber) in the card number field, the corresponding card type is searched.
+     * After at least 6 digits have been entered(issuerIdentificationNumber) in the card number field,
+     * the corresponding card type is searched.
      * The returned 'paymentProductId' can be used to provide visual feedback to the user
      * by showing the appropriate payment product logo and specific card type details.
      */
@@ -102,11 +135,26 @@ class PaymentCardViewModel(application: Application) : AndroidViewModel(applicat
         ConnectSDK.getClientApi()
             .getIINDetails(issuerIdentificationNumber, { iinDetailsResponse: IinDetailsResponse ->
                 when (iinDetailsResponse.status) {
-                    IinStatus.UNKNOWN -> paymentProductFieldsUiState.postValue(PaymentCardUiState.IinFailed(Exception(IinStatus.UNKNOWN.name)))
-                    IinStatus.NOT_ENOUGH_DIGITS -> paymentProductFieldsUiState.postValue(PaymentCardUiState.IinFailed(Exception(IinStatus.NOT_ENOUGH_DIGITS.name)))
-                    IinStatus.EXISTING_BUT_NOT_ALLOWED -> paymentProductFieldsUiState.postValue(PaymentCardUiState.IinFailed(Exception(IinStatus.EXISTING_BUT_NOT_ALLOWED.name)))
-                    IinStatus.SUPPORTED -> getPaymentProductDetails(iinDetailsResponse.paymentProductId, null, false)
-                    else -> paymentProductFieldsUiState.postValue(PaymentCardUiState.IinFailed(Exception(IinStatus.UNKNOWN.name)))
+                    IinStatus.UNKNOWN ->
+                        paymentProductFieldsUiState.postValue(
+                            PaymentCardUiState.IinFailed(Exception(IinStatus.UNKNOWN.name))
+                        )
+                    IinStatus.NOT_ENOUGH_DIGITS ->
+                        paymentProductFieldsUiState.postValue(
+                            PaymentCardUiState.IinFailed(Exception(IinStatus.NOT_ENOUGH_DIGITS.name))
+                        )
+                    IinStatus.EXISTING_BUT_NOT_ALLOWED ->
+                        paymentProductFieldsUiState.postValue(
+                            PaymentCardUiState.IinFailed(Exception(IinStatus.EXISTING_BUT_NOT_ALLOWED.name))
+                        )
+                    IinStatus.SUPPORTED ->
+                        getPaymentProductDetails(
+                            iinDetailsResponse.paymentProductId, null, false
+                        )
+                    else ->
+                        paymentProductFieldsUiState.postValue(
+                            PaymentCardUiState.IinFailed(Exception(IinStatus.UNKNOWN.name))
+                        )
                 }
             },
                 {
@@ -222,7 +270,12 @@ class PaymentCardViewModel(application: Application) : AndroidViewModel(applicat
      */
     fun updateValueInPaymentRequest(paymentProductFieldId: String, value: String) {
         if (paymentRequest.accountOnFile != null) {
-            if (paymentRequest.accountOnFile.attributes.firstOrNull { it.key == paymentProductFieldId }?.isEditingAllowed == true || paymentProductFieldId == SECURITY_NUMBER) {
+            if (
+                paymentRequest.accountOnFile.attributes.firstOrNull {
+                    it.key == paymentProductFieldId
+                }?.isEditingAllowed == true ||
+                paymentProductFieldId == SECURITY_NUMBER
+            ) {
                 paymentRequest.setValue(paymentProductFieldId, value)
             }
         } else {
@@ -232,23 +285,7 @@ class PaymentCardViewModel(application: Application) : AndroidViewModel(applicat
 
     fun shouldEnablePayButton() {
         if (!liveFormValidating) {
-            var allRequiredFieldsNotEmpty = true
-            if (paymentRequest.paymentProduct != null && paymentProductFieldsUiState.value is PaymentCardUiState.Success) {
-                paymentRequest.values.forEach { paymentRequestValues ->
-                    if (paymentRequestValues.value.isNullOrBlank() &&
-                        paymentRequest.paymentProduct.getPaymentProductFieldById(
-                            paymentRequestValues.key
-                        ).dataRestrictions.isRequired
-                    ) {
-                        allRequiredFieldsNotEmpty = false
-                        return@forEach
-                    }
-                }
-            } else {
-                allRequiredFieldsNotEmpty = false
-            }
-
-            if (allRequiredFieldsNotEmpty) {
+            if (hasNoEmptyRequiredFields) {
                 formValidationResult.value = FormValidationResult.Valid
             } else {
                 formValidationResult.value = FormValidationResult.Invalid(null)

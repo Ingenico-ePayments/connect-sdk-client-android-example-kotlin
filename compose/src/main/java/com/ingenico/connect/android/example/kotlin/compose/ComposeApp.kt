@@ -5,17 +5,32 @@
 package com.ingenico.connect.android.example.kotlin.compose
 
 import androidx.compose.animation.AnimatedContentScope
+import androidx.compose.animation.EnterTransition
+import androidx.compose.animation.ExitTransition
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.tween
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.*
-import androidx.compose.runtime.*
+import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.ModalBottomSheetLayout
+import androidx.compose.material.ModalBottomSheetValue
+import androidx.compose.material.rememberModalBottomSheetState
+import androidx.compose.material.Scaffold
+import androidx.compose.material.Snackbar
+import androidx.compose.material.SnackbarHost
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavHostController
 import com.ingenico.connect.android.example.kotlin.compose.card.CardScreen
 import com.ingenico.connect.android.example.kotlin.compose.components.BottomSheetContent
@@ -51,7 +66,8 @@ fun ComposeApp(paymentSharedViewModel: PaymentSharedViewModel, launchGooglePay: 
 
     val focusManager = LocalFocusManager.current
     val bottomSheetState = rememberModalBottomSheetState(ModalBottomSheetValue.Hidden)
-    var informationBottomSheetContent by remember { mutableStateOf(BottomSheetContent(R.string.payment_configuration_merchant_name_helper_text)) }
+    var informationBottomSheetContent by
+        remember { mutableStateOf(BottomSheetContent(R.string.payment_configuration_merchant_name_helper_text)) }
 
     ComposeTheme {
         ModalBottomSheetLayout(
@@ -71,8 +87,9 @@ fun ComposeApp(paymentSharedViewModel: PaymentSharedViewModel, launchGooglePay: 
                             modifier = Modifier.systemBarsPadding(),
                             snackbar = { snackbarData -> Snackbar(snackbarData = snackbarData) })
                     },
-                ) {
+                ) { paddingValues ->
                     AnimatedNavigation(
+                        modifier = Modifier.padding(paddingValues),
                         navController = navController,
                         paymentSharedViewModel = paymentSharedViewModel,
                         configurationViewModel = configurationViewModel,
@@ -83,7 +100,8 @@ fun ComposeApp(paymentSharedViewModel: PaymentSharedViewModel, launchGooglePay: 
                                 bottomSheetState.show()
                             }
                         },
-                        launchGooglePay = { launchGooglePay() })
+                        launchGooglePay = { launchGooglePay() }
+                    )
                 }
             }
         )
@@ -94,6 +112,7 @@ fun ComposeApp(paymentSharedViewModel: PaymentSharedViewModel, launchGooglePay: 
 @ExperimentalAnimationApi
 @Composable
 private fun AnimatedNavigation(
+    modifier: Modifier,
     navController: NavHostController,
     paymentSharedViewModel: PaymentSharedViewModel,
     configurationViewModel: ConfigurationViewModel,
@@ -102,29 +121,16 @@ private fun AnimatedNavigation(
 ) {
     AnimatedNavHost(
         navController = navController,
+        modifier = modifier,
         startDestination = PaymentScreen.CONFIGURATION.route
     ) {
         composable(
             PaymentScreen.CONFIGURATION.route,
             enterTransition = {
-                when (initialState.destination.route) {
-                    PaymentScreen.PRODUCT.route ->
-                        slideIntoContainer(
-                            AnimatedContentScope.SlideDirection.Right,
-                            animationSpec = tween(700)
-                        )
-                    else -> null
-                }
+                enterTransitionConfigurationRoute(this)
             },
             exitTransition = {
-                when (targetState.destination.route) {
-                    PaymentScreen.PRODUCT.route ->
-                        slideOutOfContainer(
-                            AnimatedContentScope.SlideDirection.Left,
-                            animationSpec = tween(700)
-                        )
-                    else -> null
-                }
+                exitTransitionConfigurationRoute(this)
             }
         ) {
             ConfigurationScreen(
@@ -136,34 +142,10 @@ private fun AnimatedNavigation(
         composable(
             PaymentScreen.PRODUCT.route,
             enterTransition = {
-                when (initialState.destination.route) {
-                    PaymentScreen.CONFIGURATION.route ->
-                        slideIntoContainer(
-                            AnimatedContentScope.SlideDirection.Left,
-                            animationSpec = tween(700)
-                        )
-                    PaymentScreen.CARD.route ->
-                        slideIntoContainer(
-                            AnimatedContentScope.SlideDirection.Right,
-                            animationSpec = tween(700)
-                        )
-                    else -> null
-                }
+                enterTransitionProductRoute(this)
             },
             exitTransition = {
-                when (targetState.destination.route) {
-                    PaymentScreen.CONFIGURATION.route ->
-                        slideOutOfContainer(
-                            AnimatedContentScope.SlideDirection.Right,
-                            animationSpec = tween(700)
-                        )
-                    PaymentScreen.CARD.route ->
-                        slideOutOfContainer(
-                            AnimatedContentScope.SlideDirection.Left,
-                            animationSpec = tween(700)
-                        )
-                    else -> null
-                }
+                exitTransitionProductRoute(this)
             }
         ) {
             ProductScreen(
@@ -175,34 +157,10 @@ private fun AnimatedNavigation(
         composable(
             PaymentScreen.CARD.route,
             enterTransition = {
-                when (initialState.destination.route) {
-                    PaymentScreen.PRODUCT.route ->
-                        slideIntoContainer(
-                            AnimatedContentScope.SlideDirection.Left,
-                            animationSpec = tween(700)
-                        )
-                    PaymentScreen.RESULT.route ->
-                        slideIntoContainer(
-                            AnimatedContentScope.SlideDirection.Right,
-                            animationSpec = tween(700)
-                        )
-                    else -> null
-                }
+                enterTransitionCardRoute(this)
             },
             exitTransition = {
-                when (targetState.destination.route) {
-                    PaymentScreen.PRODUCT.route ->
-                        slideOutOfContainer(
-                            AnimatedContentScope.SlideDirection.Right,
-                            animationSpec = tween(700)
-                        )
-                    PaymentScreen.RESULT.route ->
-                        slideOutOfContainer(
-                            AnimatedContentScope.SlideDirection.Left,
-                            animationSpec = tween(700)
-                        )
-                    else -> null
-                }
+                exitTransitionCardRoute(this)
             }
         ) {
             CardScreen(
@@ -213,24 +171,10 @@ private fun AnimatedNavigation(
         composable(
             "${PaymentScreen.RESULT.route}/{encryptedFieldsData}",
             enterTransition = {
-                when (initialState.destination.route) {
-                    PaymentScreen.CARD.route ->
-                        slideIntoContainer(
-                            AnimatedContentScope.SlideDirection.Left,
-                            animationSpec = tween(700)
-                        )
-                    else -> null
-                }
+                enterTransitionResultRoute(this)
             },
             exitTransition = {
-                when (targetState.destination.route) {
-                    PaymentScreen.CARD.route ->
-                        slideOutOfContainer(
-                            AnimatedContentScope.SlideDirection.Right,
-                            animationSpec = tween(700)
-                        )
-                    else -> null
-                }
+                exitTransitionResultRoute(this)
             }
         ) { backStackEntry ->
             ResultScreen(
@@ -238,5 +182,121 @@ private fun AnimatedNavigation(
                 encryptedFieldsData = backStackEntry.arguments?.getString("encryptedFieldsData")
             )
         }
+    }
+}
+
+@ExperimentalAnimationApi
+private fun enterTransitionConfigurationRoute(scope: AnimatedContentScope<NavBackStackEntry>): EnterTransition? {
+    return when (scope.initialState.destination.route) {
+        PaymentScreen.PRODUCT.route ->
+            scope.slideIntoContainer(
+                AnimatedContentScope.SlideDirection.Right,
+                animationSpec = tween(700)
+            )
+        else -> null
+    }
+}
+
+@ExperimentalAnimationApi
+private fun exitTransitionConfigurationRoute(scope: AnimatedContentScope<NavBackStackEntry>): ExitTransition? {
+    return when (scope.targetState.destination.route) {
+        PaymentScreen.PRODUCT.route ->
+            scope.slideOutOfContainer(
+                AnimatedContentScope.SlideDirection.Left,
+                animationSpec = tween(700)
+            )
+        else -> null
+    }
+}
+
+@ExperimentalAnimationApi
+private fun enterTransitionProductRoute(scope: AnimatedContentScope<NavBackStackEntry>): EnterTransition? {
+    return when (scope.initialState.destination.route) {
+        PaymentScreen.CONFIGURATION.route ->
+            scope.slideIntoContainer(
+                AnimatedContentScope.SlideDirection.Left,
+                animationSpec = tween(700)
+            )
+        PaymentScreen.CARD.route ->
+            scope.slideIntoContainer(
+                AnimatedContentScope.SlideDirection.Right,
+                animationSpec = tween(700)
+            )
+        else -> null
+    }
+}
+
+@ExperimentalAnimationApi
+private fun exitTransitionProductRoute(scope: AnimatedContentScope<NavBackStackEntry>): ExitTransition? {
+    return when (scope.targetState.destination.route) {
+        PaymentScreen.CONFIGURATION.route ->
+            scope.slideOutOfContainer(
+                AnimatedContentScope.SlideDirection.Right,
+                animationSpec = tween(700)
+            )
+        PaymentScreen.CARD.route ->
+            scope.slideOutOfContainer(
+                AnimatedContentScope.SlideDirection.Left,
+                animationSpec = tween(700)
+            )
+        else -> null
+    }
+}
+
+@ExperimentalAnimationApi
+private fun enterTransitionCardRoute(scope: AnimatedContentScope<NavBackStackEntry>): EnterTransition? {
+    return when (scope.initialState.destination.route) {
+        PaymentScreen.PRODUCT.route ->
+            scope.slideIntoContainer(
+                AnimatedContentScope.SlideDirection.Left,
+                animationSpec = tween(700)
+            )
+        PaymentScreen.RESULT.route ->
+            scope.slideIntoContainer(
+                AnimatedContentScope.SlideDirection.Right,
+                animationSpec = tween(700)
+            )
+        else -> null
+    }
+}
+
+@ExperimentalAnimationApi
+private fun exitTransitionCardRoute(scope: AnimatedContentScope<NavBackStackEntry>): ExitTransition? {
+    return when (scope.targetState.destination.route) {
+        PaymentScreen.PRODUCT.route ->
+            scope.slideOutOfContainer(
+                AnimatedContentScope.SlideDirection.Right,
+                animationSpec = tween(700)
+            )
+        PaymentScreen.RESULT.route ->
+            scope.slideOutOfContainer(
+                AnimatedContentScope.SlideDirection.Left,
+                animationSpec = tween(700)
+            )
+        else -> null
+    }
+}
+
+@ExperimentalAnimationApi
+private fun enterTransitionResultRoute(scope: AnimatedContentScope<NavBackStackEntry>): EnterTransition? {
+    return when (scope.initialState.destination.route) {
+        PaymentScreen.CARD.route ->
+            scope.slideIntoContainer(
+                AnimatedContentScope.SlideDirection.Left,
+                animationSpec = tween(700)
+            )
+        else -> null
+    }
+}
+
+@ExperimentalAnimationApi
+private fun exitTransitionResultRoute(scope: AnimatedContentScope<NavBackStackEntry>): ExitTransition? {
+    return when (scope.targetState.destination.route) {
+        PaymentScreen.CARD.route ->
+            scope.slideOutOfContainer(
+                AnimatedContentScope.SlideDirection.Right,
+                animationSpec = tween(700)
+            )
+        else -> null
     }
 }

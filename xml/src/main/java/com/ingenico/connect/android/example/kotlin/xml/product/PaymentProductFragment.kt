@@ -19,7 +19,11 @@ import com.ingenico.connect.android.example.kotlin.common.PaymentSharedViewModel
 import com.ingenico.connect.android.example.kotlin.common.utils.Status
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.ingenico.connect.gateway.sdk.client.android.ConnectSDK
-import com.ingenico.connect.gateway.sdk.client.android.sdk.model.paymentproduct.*
+import com.ingenico.connect.gateway.sdk.client.android.sdk.model.paymentproduct.AccountOnFile
+import com.ingenico.connect.gateway.sdk.client.android.sdk.model.paymentproduct.BasicPaymentItem
+import com.ingenico.connect.gateway.sdk.client.android.sdk.model.paymentproduct.BasicPaymentItems
+import com.ingenico.connect.gateway.sdk.client.android.sdk.model.paymentproduct.BasicPaymentProduct
+import com.ingenico.connect.gateway.sdk.client.android.sdk.model.paymentproduct.BasicPaymentProductGroup
 
 class PaymentProductFragment : Fragment() {
 

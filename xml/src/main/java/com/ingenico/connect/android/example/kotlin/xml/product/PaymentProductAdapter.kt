@@ -14,12 +14,14 @@ import com.ingenico.connect.gateway.sdk.client.android.sdk.model.paymentproduct.
 import com.ingenico.connect.gateway.sdk.client.android.sdk.model.paymentproduct.BasicPaymentItem
 import com.squareup.picasso.Picasso
 
-class PaymentProductAdapter(var baseAssetsUrl: String) : RecyclerView.Adapter<PaymentProductAdapter.PaymentProductViewHolder>() {
+class PaymentProductAdapter(
+    var baseAssetsUrl: String
+) : RecyclerView.Adapter<PaymentProductAdapter.PaymentProductViewHolder>() {
 
     var paymentProducts: List<Any> = emptyList()
         set(value) {
             field = value
-            notifyDataSetChanged()
+            notifyItemRangeChanged(0, paymentProducts.size)
         }
 
     var onBasicPaymentItemClicked: ((BasicPaymentItem) -> Unit)? = null
@@ -49,7 +51,9 @@ class PaymentProductAdapter(var baseAssetsUrl: String) : RecyclerView.Adapter<Pa
         return paymentProducts.size
     }
 
-    inner class PaymentProductViewHolder(private val binding: ListitemPaymentProductBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class PaymentProductViewHolder(
+        private val binding: ListitemPaymentProductBinding
+    ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bindBasicPaymentItem(basicPaymentItem: BasicPaymentItem) {
             binding.root.run {

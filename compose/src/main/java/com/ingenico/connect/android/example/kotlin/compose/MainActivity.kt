@@ -43,6 +43,8 @@ class MainActivity : ComponentActivity() {
      * Listener for when Google Pay sheet is finished
      */
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
         when (requestCode) {
             GOOGLE_PAY_REQUEST_CODE -> {
                 when (resultCode) {
@@ -56,7 +58,8 @@ class MainActivity : ComponentActivity() {
 
                     AutoResolveHelper.RESULT_ERROR -> {
                         AutoResolveHelper.getStatusFromIntent(data)?.let { status ->
-                            paymentSharedViewModel.globalErrorMessage.value = "Google pay loadPaymentData failed with error code: ${status.statusCode}"
+                            paymentSharedViewModel.globalErrorMessage.value =
+                                "Google pay loadPaymentData failed with error code: ${status.statusCode}"
                         }
                     }
                 }
@@ -68,7 +71,8 @@ class MainActivity : ComponentActivity() {
         paymentGooglePayViewModel.paymentProductStatus.observe(this) { paymentProductStatus ->
             when (paymentProductStatus) {
                 is Status.ApiError -> {
-                    paymentSharedViewModel.globalErrorMessage.value = paymentProductStatus.apiError.errors.first().message
+                    paymentSharedViewModel.globalErrorMessage.value =
+                        paymentProductStatus.apiError.errors.first().message
                 }
                 is Status.Success -> {
                     requestGooglePayPayment(paymentProductStatus.data as BasicPaymentProduct)
@@ -90,10 +94,12 @@ class MainActivity : ComponentActivity() {
         paymentGooglePayViewModel.encryptedPaymentRequestStatus.observe(this) { encryptedPaymentRequestStatus ->
             when (encryptedPaymentRequestStatus) {
                 is Status.ApiError -> {
-                    paymentSharedViewModel.globalErrorMessage.value = encryptedPaymentRequestStatus.apiError.errors.first().message
+                    paymentSharedViewModel.globalErrorMessage.value =
+                        encryptedPaymentRequestStatus.apiError.errors.first().message
                 }
                 is Status.Success -> {
-                    val encryptedFieldsData = (encryptedPaymentRequestStatus.data as EncryptedPaymentRequest).encryptedFields
+                    val encryptedFieldsData =
+                        (encryptedPaymentRequestStatus.data as EncryptedPaymentRequest).encryptedFields
                     paymentSharedViewModel.googlePayData.value = encryptedFieldsData
                 }
                 is  Status.Failed -> {

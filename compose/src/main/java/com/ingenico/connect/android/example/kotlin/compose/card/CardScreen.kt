@@ -4,7 +4,13 @@
 
 package com.ingenico.connect.android.example.kotlin.compose.card
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
@@ -14,6 +20,7 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.platform.SoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -27,7 +34,11 @@ import com.ingenico.connect.android.example.kotlin.common.PaymentScreen
 import com.ingenico.connect.android.example.kotlin.common.PaymentSharedViewModel
 import com.ingenico.connect.android.example.kotlin.common.utils.FormValidationResult
 import com.ingenico.connect.android.example.kotlin.common.utils.Status
-import com.ingenico.connect.android.example.kotlin.compose.components.*
+import com.ingenico.connect.android.example.kotlin.compose.components.BottomSheetContent
+import com.ingenico.connect.android.example.kotlin.compose.components.FailedText
+import com.ingenico.connect.android.example.kotlin.compose.components.LabelledCheckbox
+import com.ingenico.connect.android.example.kotlin.compose.components.PrimaryButton
+import com.ingenico.connect.android.example.kotlin.compose.components.ProgressIndicator
 import com.ingenico.connect.android.example.kotlin.compose.R
 import com.ingenico.connect.gateway.sdk.client.android.ConnectSDK
 import com.ingenico.connect.gateway.sdk.client.android.sdk.model.EncryptedPaymentRequest
@@ -44,7 +55,6 @@ fun CardScreen(
     paymentCardViewModel: PaymentCardViewModel = viewModel(),
     cardScreenViewModel: CardScreenViewModel = viewModel()
 ) {
-
     val keyboardController = LocalSoftwareKeyboardController.current
     val cardFields = cardScreenViewModel.cardFields
 
@@ -54,23 +64,10 @@ fun CardScreen(
         )
     }
 
-    val formValidationResult by paymentCardViewModel.formValidationResult.observeAsState(FormValidationResult.NotValidated)
+    val formValidationResult by
+        paymentCardViewModel.formValidationResult.observeAsState(FormValidationResult.NotValidated)
 
-    when(formValidationResult) {
-        is FormValidationResult.InvalidWithValidationErrorMessage -> {
-            cardScreenViewModel.setFieldErrors((formValidationResult as FormValidationResult.InvalidWithValidationErrorMessage).exceptions)
-        }
-        is FormValidationResult.Valid -> {
-            cardScreenViewModel.setFieldErrors(emptyList())
-        }
-        is FormValidationResult.NotValidated -> {
-            cardScreenViewModel.setFieldErrors(emptyList())
-        }
-        is FormValidationResult.Invalid -> {
-            // No option, when form is invalid it will always come in the
-            // FormValidationResult.InvalidWithValidationErrorMessage case
-        }
-    }
+    analyzeFormValidationResult(formValidationResult, cardScreenViewModel)
 
     val encryptedPaymentRequestStatus by paymentCardViewModel.encryptedPaymentRequestStatus.observeAsState(Status.None)
 
@@ -84,10 +81,9 @@ fun CardScreen(
         is Status.Success -> {
             val encryptedDataFields =
                 ((encryptedPaymentRequestStatus as Status.Success).data as EncryptedPaymentRequest).encryptedFields
-            cardScreenViewModel.cardFieldsEnabled(true)
-            paymentCardViewModel.formValidationResult.value = FormValidationResult.NotValidated
-            paymentCardViewModel.encryptedPaymentRequestStatus.value = Status.None
-            paymentCardViewModel.paymentProductFieldsUiState.value = PaymentCardUiState.None
+
+            updateValuesOnSuccessStatus(cardScreenViewModel, paymentCardViewModel)
+
             keyboardController?.hide()
             navController.navigate("${PaymentScreen.RESULT.route}/$encryptedDataFields"){
                 popUpTo(PaymentScreen.CONFIGURATION.route)
@@ -106,30 +102,7 @@ fun CardScreen(
     )
 
     if (paymentProductFieldsUiState is PaymentCardUiState.Success) {
-        cardFields.cardNumberField.isLoading = false
-        val paymentFields = (paymentProductFieldsUiState as PaymentCardUiState.Success)
-        cardScreenViewModel.updateFields(
-            paymentProductFields = paymentFields.paymentFields,
-            logoUrl = ConnectSDK.getConnectSdkConfiguration().sessionConfiguration.assetUrl + paymentFields.logoUrl,
-            accountOnFile = paymentFields.accountOnFile,
-        )
-        paymentCardViewModel.updateValueInPaymentRequest(
-            cardFields.cardNumberField.id,
-            cardFields.cardNumberField.text
-        )
-        paymentCardViewModel.updateValueInPaymentRequest(
-            cardFields.expiryDateField.id,
-            cardFields.expiryDateField.text
-        )
-        paymentCardViewModel.updateValueInPaymentRequest(
-            cardFields.securityNumberField.id,
-            cardFields.securityNumberField.text
-        )
-        paymentCardViewModel.updateValueInPaymentRequest(
-            cardFields.cardHolderField.id,
-            cardFields.cardHolderField.text
-        )
-        paymentCardViewModel.shouldEnablePayButton()
+        updateValuesOnSuccessUIState(paymentProductFieldsUiState, cardScreenViewModel, paymentCardViewModel, cardFields)
     }
 
     CardContent(
@@ -141,7 +114,9 @@ fun CardScreen(
         onPrimaryButtonClicked = { paymentCardViewModel.onPayClicked() },
         showBottomSheet = { showBottomSheet(it) },
         issuerIdentificationNumberChanged = { issuerIdentificationNumber ->
-            if (paymentSharedViewModel.selectedPaymentProduct is BasicPaymentProductGroup) cardFields.cardNumberField.isLoading = true
+            if (paymentSharedViewModel.selectedPaymentProduct is BasicPaymentProductGroup) {
+                cardFields.cardNumberField.isLoading = true
+            }
             paymentCardViewModel.getPaymentProductId(issuerIdentificationNumber)
         },
         onValueChanged = { paymentProductField, value ->
@@ -149,6 +124,76 @@ fun CardScreen(
         },
         rememberCardValue = { paymentCardViewModel.saveCardForLater(it) }
     )
+}
+
+private fun analyzeFormValidationResult(
+    formValidationResult: FormValidationResult,
+    cardScreenViewModel: CardScreenViewModel
+) {
+    when(formValidationResult) {
+        is FormValidationResult.InvalidWithValidationErrorMessage -> {
+            cardScreenViewModel.setFieldErrors(
+                (formValidationResult as FormValidationResult.InvalidWithValidationErrorMessage).exceptions
+            )
+        }
+        is FormValidationResult.Valid -> {
+            cardScreenViewModel.setFieldErrors(emptyList())
+        }
+        is FormValidationResult.NotValidated -> {
+            cardScreenViewModel.setFieldErrors(emptyList())
+        }
+        is FormValidationResult.Invalid -> {
+            // No option, when form is invalid it will always come in the
+            // FormValidationResult.InvalidWithValidationErrorMessage case
+        }
+    }
+}
+
+private fun updateValuesOnSuccessStatus(
+    cardScreenViewModel: CardScreenViewModel,
+    paymentCardViewModel: PaymentCardViewModel
+) {
+    cardScreenViewModel.cardFieldsEnabled(true)
+
+    paymentCardViewModel.formValidationResult.value = FormValidationResult.NotValidated
+    paymentCardViewModel.encryptedPaymentRequestStatus.value = Status.None
+    paymentCardViewModel.paymentProductFieldsUiState.value = PaymentCardUiState.None
+}
+
+private fun updateValuesOnSuccessUIState(
+    paymentCardUiState: PaymentCardUiState,
+    cardScreenViewModel: CardScreenViewModel,
+    paymentCardViewModel: PaymentCardViewModel,
+    cardFields: CardFields
+) {
+    cardFields.cardNumberField.isLoading = false
+
+    val paymentFields = (paymentCardUiState as PaymentCardUiState.Success)
+
+    cardScreenViewModel.updateFields(
+        paymentProductFields = paymentFields.paymentFields,
+        logoUrl = ConnectSDK.getConnectSdkConfiguration().sessionConfiguration.assetUrl + paymentFields.logoUrl,
+        accountOnFile = paymentFields.accountOnFile,
+    )
+
+    paymentCardViewModel.updateValueInPaymentRequest(
+        cardFields.cardNumberField.id,
+        cardFields.cardNumberField.text
+    )
+    paymentCardViewModel.updateValueInPaymentRequest(
+        cardFields.expiryDateField.id,
+        cardFields.expiryDateField.text
+    )
+    paymentCardViewModel.updateValueInPaymentRequest(
+        cardFields.securityNumberField.id,
+        cardFields.securityNumberField.text
+    )
+    paymentCardViewModel.updateValueInPaymentRequest(
+        cardFields.cardHolderField.id,
+        cardFields.cardHolderField.text
+    )
+
+    paymentCardViewModel.shouldEnablePayButton()
 }
 
 @Composable
@@ -170,18 +215,8 @@ fun CardContent(
                 FailedText()
             }
             is PaymentCardUiState.IinFailed -> {
-                when (uiState.throwable.message) {
-                    IinStatus.UNKNOWN.name -> {
-                        cardFields.cardNumberField.networkErrorMessage =
-                            stringResource(id = R.string.gc_general_paymentProductFields_validationErrors_iin_label)
-                    }
-                    IinStatus.EXISTING_BUT_NOT_ALLOWED.name -> {
-                        cardFields.cardNumberField.networkErrorMessage =
-                            stringResource(id = R.string.gc_general_paymentProductFields_validationErrors_allowedInContext_label)
-                    }
-                }
-                cardFields.cardNumberField.isLoading = false
-                CardItems(
+                IinFailedStateContent(
+                    uiState = uiState,
                     cardFields = cardFields,
                     assetsBaseUrl = assetsBaseUrl,
                     isFormValid = isFormValid,
@@ -232,6 +267,52 @@ fun CardContent(
 }
 
 @Composable
+private fun IinFailedStateContent(
+    uiState: PaymentCardUiState.IinFailed,
+    cardFields: CardFields,
+    assetsBaseUrl: String,
+    isFormValid: Boolean,
+    isFormSubmitted: Boolean,
+    onPrimaryButtonClicked: () -> Unit,
+    showBottomSheet: (BottomSheetContent) -> Unit,
+    issuerIdentificationNumberChanged: (String) -> Unit,
+    onValueChanged: (PaymentProductField, String) -> Unit,
+    rememberCardValue: (Boolean) -> Unit
+) {
+    when (uiState.throwable.message) {
+        IinStatus.UNKNOWN.name -> {
+            cardFields.cardNumberField.networkErrorMessage =
+                stringResource(
+                    id = R.string.gc_general_paymentProductFields_validationErrors_iin_label
+                )
+        }
+        IinStatus.EXISTING_BUT_NOT_ALLOWED.name -> {
+            cardFields.cardNumberField.networkErrorMessage =
+                stringResource(
+                    id = R.string.gc_general_paymentProductFields_validationErrors_allowedInContext_label
+                )
+        }
+    }
+    cardFields.cardNumberField.isLoading = false
+    CardItems(
+        cardFields = cardFields,
+        assetsBaseUrl = assetsBaseUrl,
+        isFormValid = isFormValid,
+        isFormSubmitted = isFormSubmitted,
+        onPrimaryButtonClicked = { onPrimaryButtonClicked() },
+        showBottomSheet = { showBottomSheet(it) },
+        issuerIdentificationNumberChanged = { issuerIdentificationNumberChanged(it) },
+        onValueChanged = { paymentProductField, value ->
+            onValueChanged(
+                paymentProductField,
+                value
+            )
+        },
+        rememberCardValue = { rememberCardValue(it) }
+    )
+}
+
+@Composable
 fun CardItems(
     cardFields: CardFields,
     assetsBaseUrl: String,
@@ -260,42 +341,7 @@ fun CardItems(
                     value
                 )
             })
-        Row {
-            Column(modifier = Modifier.weight(2f)) {
-                CardTextField(
-                    cardTextFieldState = cardFields.expiryDateField,
-                    onValueChanged = { paymentProductField, value ->
-                        onValueChanged(
-                            paymentProductField,
-                            value
-                        )
-                    }
-                )
-            }
-            Column(
-                modifier = Modifier
-                    .weight(2f)
-                    .padding(start = 8.dp)
-            ) {
-                CardTextField(
-                    cardTextFieldState = cardFields.securityNumberField,
-                    onTrailingIconClicked = {
-                        showBottomSheet(
-                            BottomSheetContent(
-                                text = cardFields.securityNumberField.tooltipText ?: "",
-                                imageUrl = assetsBaseUrl + cardFields.securityNumberField.tooltipImageUrl
-                            )
-                        )
-                    },
-                    onValueChanged = { paymentProductField, value ->
-                        onValueChanged(
-                            paymentProductField,
-                            value
-                        )
-                    }
-                )
-            }
-        }
+        ExpiryDateSecurityNumberRow(cardFields, assetsBaseUrl, showBottomSheet, onValueChanged)
         CardTextField(
             cardTextFieldState = cardFields.cardHolderField,
             onValueChanged = { paymentProductField, value ->
@@ -315,6 +361,51 @@ fun CardItems(
             enabled = isFormValid,
             showLoadingStatus = isFormSubmitted
         )
+    }
+}
+
+@Composable
+private fun ExpiryDateSecurityNumberRow(
+    cardFields: CardFields,
+    assetsBaseUrl: String,
+    showBottomSheet: (BottomSheetContent) -> Unit,
+    onValueChanged: (PaymentProductField, String) -> Unit
+) {
+    Row {
+        Column(modifier = Modifier.weight(2f)) {
+            CardTextField(
+                cardTextFieldState = cardFields.expiryDateField,
+                onValueChanged = { paymentProductField, value ->
+                    onValueChanged(
+                        paymentProductField,
+                        value
+                    )
+                }
+            )
+        }
+        Column(
+            modifier = Modifier
+                .weight(2f)
+                .padding(start = 8.dp)
+        ) {
+            CardTextField(
+                cardTextFieldState = cardFields.securityNumberField,
+                onTrailingIconClicked = {
+                    showBottomSheet(
+                        BottomSheetContent(
+                            text = cardFields.securityNumberField.tooltipText ?: "",
+                            imageUrl = assetsBaseUrl + cardFields.securityNumberField.tooltipImageUrl
+                        )
+                    )
+                },
+                onValueChanged = { paymentProductField, value ->
+                    onValueChanged(
+                        paymentProductField,
+                        value
+                    )
+                }
+            )
+        }
     }
 }
 

@@ -375,6 +375,8 @@
 	<string name="gc.general.paymentProducts.185.name">NH Card</string>
 	<string name="gc.general.paymentProducts.186.name">Samsung Card</string>
 	<string name="gc.general.paymentProducts.187.name">Shinhan Card</string>
+	<string name="gc.general.paymentProducts.188.name">Troy</string>
+	<string name="gc.general.paymentProducts.189.name">Troy Debit</string>
 	<string name="gc.general.paymentProducts.2.name">American Express</string>
 	<string name="gc.general.paymentProducts.2.paymentProductFields.cardNumber.placeholder">**** ****** *****</string>
 	<string name="gc.general.paymentProducts.2.paymentProductFields.cvv.label">CID</string>

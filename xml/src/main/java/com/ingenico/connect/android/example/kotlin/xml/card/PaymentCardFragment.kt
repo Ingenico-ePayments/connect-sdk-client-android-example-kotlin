@@ -25,7 +25,11 @@ import com.ingenico.connect.android.example.kotlin.common.utils.Constants.SECURI
 import com.ingenico.connect.android.example.kotlin.common.utils.FormValidationResult
 import com.ingenico.connect.android.example.kotlin.common.utils.Status
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.ingenico.connect.android.example.kotlin.common.*
+import com.ingenico.connect.android.example.kotlin.common.PaymentCardUiState
+import com.ingenico.connect.android.example.kotlin.common.PaymentCardViewModel
+import com.ingenico.connect.android.example.kotlin.common.PaymentScreen
+import com.ingenico.connect.android.example.kotlin.common.PaymentSharedViewModel
+import com.ingenico.connect.android.example.kotlin.common.PaymentCardValidationErrorMessageMapper
 import com.ingenico.connect.gateway.sdk.client.android.ConnectSDK
 import com.ingenico.connect.gateway.sdk.client.android.sdk.formatter.StringFormatter
 import com.ingenico.connect.gateway.sdk.client.android.sdk.model.EncryptedPaymentRequest
@@ -86,7 +90,8 @@ class PaymentCardFragment : Fragment() {
         )
 
         if (paymentSharedViewModel.selectedPaymentProduct is AccountOnFile){
-            accountOnFilePaymentProductId = (paymentSharedViewModel.selectedPaymentProduct as AccountOnFile).paymentProductId
+            accountOnFilePaymentProductId =
+                (paymentSharedViewModel.selectedPaymentProduct as AccountOnFile).paymentProductId
         }
 
         paymentCardViewModel.getPaymentProduct(
@@ -203,10 +208,13 @@ class PaymentCardFragment : Fragment() {
     }
 
     private fun observeEncryptedPaymentRequestStatus() {
-        paymentCardViewModel.encryptedPaymentRequestStatus.observe(viewLifecycleOwner) { EncryptedPaymentRequestStatus ->
+        paymentCardViewModel.encryptedPaymentRequestStatus.observe(
+            viewLifecycleOwner
+        ) { EncryptedPaymentRequestStatus ->
             when (EncryptedPaymentRequestStatus) {
                 is Status.ApiError -> {
-                    paymentSharedViewModel.globalErrorMessage.value = EncryptedPaymentRequestStatus.apiError.errors.first().message
+                    paymentSharedViewModel.globalErrorMessage.value =
+                        EncryptedPaymentRequestStatus.apiError.errors.first().message
                     binding.clPaymentCardInputForm.deepForEach { isEnabled = true }
                     binding.btnPaymentCardPayProduct.hideLoadingIndicator()
                 }
@@ -215,8 +223,11 @@ class PaymentCardFragment : Fragment() {
                     binding.btnPaymentCardPayProduct.showLoadingIndicator()
                 }
                 is Status.Success -> {
-                    val encryptedFieldsData = (EncryptedPaymentRequestStatus.data as EncryptedPaymentRequest).encryptedFields
-                    findNavController().navigate(PaymentCardFragmentDirections.navigateToPaymentResultFragment(encryptedFieldsData))
+                    val encryptedFieldsData =
+                        (EncryptedPaymentRequestStatus.data as EncryptedPaymentRequest).encryptedFields
+                    findNavController().navigate(
+                        PaymentCardFragmentDirections.navigateToPaymentResultFragment(encryptedFieldsData)
+                    )
                 }
                 is Status.Failed -> {
                     paymentSharedViewModel.globalErrorMessage.value = EncryptedPaymentRequestStatus.throwable.message

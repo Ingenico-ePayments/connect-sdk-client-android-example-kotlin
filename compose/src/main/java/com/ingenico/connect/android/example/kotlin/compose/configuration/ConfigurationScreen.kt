@@ -24,12 +24,17 @@ import com.ingenico.connect.android.example.kotlin.common.PaymentScreen
 import com.ingenico.connect.android.example.kotlin.common.PaymentSharedViewModel
 import com.ingenico.connect.android.example.kotlin.common.googlepay.GooglePayConfiguration
 import com.ingenico.connect.android.example.kotlin.compose.R
-import com.ingenico.connect.android.example.kotlin.compose.components.*
+import com.ingenico.connect.android.example.kotlin.compose.components.BottomSheetContent
+import com.ingenico.connect.android.example.kotlin.compose.components.CheckBoxField
+import com.ingenico.connect.android.example.kotlin.compose.components.LabelledCheckbox
+import com.ingenico.connect.android.example.kotlin.compose.components.PrimaryButton
+import com.ingenico.connect.android.example.kotlin.compose.components.SecondaryButton
+import com.ingenico.connect.android.example.kotlin.compose.components.SectionTitle
 import com.ingenico.connect.android.example.kotlin.compose.theme.ComposeTheme
 import com.ingenico.connect.gateway.sdk.client.android.sdk.configuration.SessionConfiguration
 import com.ingenico.connect.gateway.sdk.client.android.sdk.model.AmountOfMoney
 import com.ingenico.connect.gateway.sdk.client.android.sdk.model.PaymentContext
-import java.util.*
+import java.util.Locale
 
 @Composable
 fun ConfigurationScreen(
@@ -104,7 +109,10 @@ private fun ConfigurationContent(
             modifier = Modifier
                 .padding(top = 16.dp)
                 .align(Alignment.End), onSecondaryButtonClicked = { onSecondaryButtonClicked() })
-        SectionTitle(stringResource(id = R.string.payment_configuration_payment_details), modifier = Modifier.padding(top = 32.dp))
+        SectionTitle(stringResource(
+            id = R.string.payment_configuration_payment_details),
+            modifier = Modifier.padding(top = 32.dp)
+        )
         uiState.paymentDetailsFields.forEach { configurationInputField ->
             ConfigurationTextField(
                 textFieldState = configurationInputField,
@@ -112,14 +120,21 @@ private fun ConfigurationContent(
                     showBottomSheet(configurationInputField.bottomSheetContent)
                 })
         }
-        SectionTitle(text = stringResource(id = R.string.payment_configuration_other_options), modifier = Modifier.padding(top = 32.dp))
+        SectionTitle(
+            text = stringResource(id = R.string.payment_configuration_other_options),
+            modifier = Modifier.padding(top = 32.dp)
+        )
         LabelledCheckbox(checkBoxField = uiState.otherOptionsFields[0], onTrailingIconClicked = {
             showBottomSheet(uiState.otherOptionsFields[0].bottomSheetContent)
         })
         LabelledCheckbox(checkBoxField = uiState.otherOptionsFields[1], onTrailingIconClicked = {
             showBottomSheet(uiState.otherOptionsFields[1].bottomSheetContent)
         })
-        GooglePaySection(checkBoxField = uiState.otherOptionsFields[2], uiState.googlePayFields, showBottomSheet = { showBottomSheet(it) })
+        GooglePaySection(
+            checkBoxField = uiState.otherOptionsFields[2],
+            uiState.googlePayFields,
+            showBottomSheet = { showBottomSheet(it) }
+        )
         PrimaryButton(
             text = stringResource(id = R.string.payment_configuration_proceed_to_checkout),
             modifier = Modifier

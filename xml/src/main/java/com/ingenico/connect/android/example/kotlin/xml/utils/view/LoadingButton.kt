@@ -6,7 +6,6 @@ package com.ingenico.connect.android.example.kotlin.xml.utils.view
 
 import android.content.Context
 import android.util.AttributeSet
-import android.util.Log
 import android.view.View
 import android.widget.ProgressBar
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -40,8 +39,6 @@ class LoadingButton(context: Context, attributeSet: AttributeSet) : ConstraintLa
                 isButtonEnabled = getBoolean(R.styleable.LoadingButton_android_enabled, true)
                 loadingButtonMaterialButton.text = buttonText
                 loadingButtonMaterialButton.isEnabled = isButtonEnabled
-            } catch (exception: Exception) {
-                Log.e(javaClass.name, exception.toString())
             } finally {
                 recycle()
             }

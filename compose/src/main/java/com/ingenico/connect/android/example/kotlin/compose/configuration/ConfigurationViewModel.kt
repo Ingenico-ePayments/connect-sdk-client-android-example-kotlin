@@ -4,6 +4,7 @@
 
 package com.ingenico.connect.android.example.kotlin.compose.configuration
 
+import android.util.Log
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
@@ -12,12 +13,13 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.lifecycle.ViewModel
+import com.google.gson.Gson
+import com.google.gson.JsonSyntaxException
 import com.ingenico.connect.android.example.kotlin.compose.R
 import com.ingenico.connect.android.example.kotlin.compose.components.BottomSheetContent
 import com.ingenico.connect.android.example.kotlin.compose.components.CheckBoxField
 import com.ingenico.connect.android.example.kotlin.compose.components.IsValid
 import com.ingenico.connect.android.example.kotlin.compose.extensions.concatenate
-import com.google.gson.Gson
 import com.ingenico.connect.gateway.sdk.client.android.sdk.configuration.SessionConfiguration
 import java.util.*
 
@@ -34,7 +36,9 @@ class ConfigurationViewModel : ViewModel() {
                 uiState.sessionDetailFields[2].text = clientApiUrl
                 uiState.sessionDetailFields[3].text = assetUrl
             }
-        } catch (exception: Exception) {
+        } catch (exception: JsonSyntaxException) {
+            // Could not parse clipboard data due to a malformed JSON element
+            Log.e(javaClass.name, exception.toString())
         }
     }
 

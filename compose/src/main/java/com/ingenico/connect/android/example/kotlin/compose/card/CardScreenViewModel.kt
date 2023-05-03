@@ -50,73 +50,94 @@ class CardScreenViewModel(application: Application) : AndroidViewModel(applicati
         paymentProductFields.forEach { paymentProductField ->
             when (paymentProductField.id) {
                 cardFields.cardNumberField.id -> {
-                    cardFields.cardNumberField.apply {
-                        label = paymentProductField.displayHints.placeholderLabel
-                        mask = paymentProductField.displayHints.mask
-                        maxSize = paymentProductField.dataRestrictions.validator.length.maxLength
-                        trailingImageUrl = logoUrl
-                        this.paymentProductField = paymentProductField
-                    }
-
-                        accountOnFileAttributes(
-                            accountOnFile,
-                            paymentProductField.id,
-                            cardFields.cardNumberField
-                        )
-
+                    updateCardNumberField(logoUrl, accountOnFile, paymentProductField)
                 }
 
                 cardFields.expiryDateField.id -> {
-                    cardFields.expiryDateField.apply {
-                        label = paymentProductField.displayHints.placeholderLabel
-                        mask = paymentProductField.displayHints.mask
-                        maxSize = paymentProductField.dataRestrictions.validator.length.maxLength
-                        this.paymentProductField = paymentProductField
-                    }
-
-                    if (accountOnFile != null && !isAccountOnFileDataLoaded) {
-                        accountOnFileAttributes(
-                            accountOnFile,
-                            paymentProductField.id,
-                            cardFields.expiryDateField
-                        )
-                    }
+                    updateExpiryDateField(accountOnFile, paymentProductField)
                 }
+
                 cardFields.securityNumberField.id -> {
-                    cardFields.securityNumberField.apply {
-                        label = paymentProductField.displayHints.placeholderLabel
-                        mask = paymentProductField.displayHints.mask
-                        maxSize = paymentProductField.dataRestrictions.validator.length.maxLength
-                        tooltipImageUrl = paymentProductField.displayHints.tooltip.imageURL
-                        tooltipText = paymentProductField.displayHints.tooltip.label
-                        this.paymentProductField = paymentProductField
-                    }
-
-                    if (accountOnFile != null && !isAccountOnFileDataLoaded) {
-                        accountOnFileAttributes(
-                            accountOnFile,
-                            paymentProductField.id,
-                            cardFields.securityNumberField
-                        )
-                    }
+                   updateSecurityNumberField(accountOnFile, paymentProductField)
                 }
+
                 cardFields.cardHolderField.id -> {
-                    cardFields.cardHolderField.apply {
-                        label = paymentProductField.displayHints.placeholderLabel
-                        this.paymentProductField = paymentProductField
-                    }
-                    if (accountOnFile != null && !isAccountOnFileDataLoaded) {
-                        accountOnFileAttributes(
-                            accountOnFile,
-                            paymentProductField.id,
-                            cardFields.cardHolderField
-                        )
-                    }
+                    updateCardHolderField(accountOnFile, paymentProductField)
                 }
             }
         }
 
         if (accountOnFile != null && !isAccountOnFileDataLoaded) isAccountOnFileDataLoaded = true
+    }
+
+    private fun updateCardNumberField(
+        logoUrl: String,
+        accountOnFile: AccountOnFile?,
+        paymentProductField: PaymentProductField
+    ) {
+        cardFields.cardNumberField.apply {
+            label = paymentProductField.displayHints.placeholderLabel
+            mask = paymentProductField.displayHints.mask
+            maxSize = paymentProductField.dataRestrictions.validator.length.maxLength
+            trailingImageUrl = logoUrl
+            this.paymentProductField = paymentProductField
+        }
+
+        accountOnFileAttributes(
+            accountOnFile,
+            paymentProductField.id,
+            cardFields.cardNumberField
+        )
+    }
+
+    private fun updateExpiryDateField(accountOnFile: AccountOnFile?, paymentProductField: PaymentProductField) {
+        cardFields.expiryDateField.apply {
+            label = paymentProductField.displayHints.placeholderLabel
+            mask = paymentProductField.displayHints.mask
+            maxSize = paymentProductField.dataRestrictions.validator.length.maxLength
+            this.paymentProductField = paymentProductField
+        }
+
+        if (accountOnFile != null && !isAccountOnFileDataLoaded) {
+            accountOnFileAttributes(
+                accountOnFile,
+                paymentProductField.id,
+                cardFields.expiryDateField
+            )
+        }
+    }
+
+    private fun updateSecurityNumberField(accountOnFile: AccountOnFile?, paymentProductField: PaymentProductField) {
+        cardFields.securityNumberField.apply {
+            label = paymentProductField.displayHints.placeholderLabel
+            mask = paymentProductField.displayHints.mask
+            maxSize = paymentProductField.dataRestrictions.validator.length.maxLength
+            tooltipImageUrl = paymentProductField.displayHints.tooltip.imageURL
+            tooltipText = paymentProductField.displayHints.tooltip.label
+            this.paymentProductField = paymentProductField
+        }
+
+        if (accountOnFile != null && !isAccountOnFileDataLoaded) {
+            accountOnFileAttributes(
+                accountOnFile,
+                paymentProductField.id,
+                cardFields.securityNumberField
+            )
+        }
+    }
+
+    private fun updateCardHolderField(accountOnFile: AccountOnFile?, paymentProductField: PaymentProductField) {
+        cardFields.cardHolderField.apply {
+            label = paymentProductField.displayHints.placeholderLabel
+            this.paymentProductField = paymentProductField
+        }
+        if (accountOnFile != null && !isAccountOnFileDataLoaded) {
+            accountOnFileAttributes(
+                accountOnFile,
+                paymentProductField.id,
+                cardFields.cardHolderField
+            )
+        }
     }
 
     /**

@@ -15,7 +15,10 @@ import com.ingenico.connect.gateway.sdk.client.android.sdk.model.paymentproduct.
  *  cardNumber: 1234 1234 1234 1234 {{9999 9999 9999 9999}}
  *  expiryDate: 11/11 {{99/99}}
  */
-class PaymentCardMaskTextWatcher(private val editText: EditText, private val paymentProductField: PaymentProductField) : TextWatcher {
+class PaymentCardMaskTextWatcher(
+    private val editText: EditText,
+    private val paymentProductField: PaymentProductField
+) : TextWatcher {
 
     private var oldValue: String? = null
     private var start = 0

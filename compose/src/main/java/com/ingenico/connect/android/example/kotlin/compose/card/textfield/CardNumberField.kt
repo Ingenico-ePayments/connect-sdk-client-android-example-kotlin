@@ -65,22 +65,7 @@ fun CardNumberField(
             Icon(imageVector = cardNumberTextFieldState.leadingIcon, null)
         },
         trailingIcon = {
-            if (cardNumberTextFieldState.isLoading) {
-                CircularProgressIndicator(
-                    modifier = Modifier
-                        .width(25.dp)
-                        .height(25.dp),
-                    strokeWidth = 2.dp
-                )
-            } else if (cardNumberTextFieldState.trailingImageUrl.isNotBlank()) {
-                Image(
-                    painter = rememberImagePainter(cardNumberTextFieldState.trailingImageUrl),
-                    contentDescription = null,
-                    modifier = Modifier
-                        .width(50.dp)
-                        .height(25.dp)
-                )
-            }
+            TrailingIcon(cardNumberTextFieldState)
         },
         error = {
             if (cardNumberTextFieldState.networkErrorMessage.isNotBlank()) {
@@ -106,6 +91,26 @@ fun CardNumberField(
             }
         )
     )
+}
+
+@Composable
+private fun TrailingIcon(cardNumberTextFieldState: CardNumberTextFieldState,) {
+    if (cardNumberTextFieldState.isLoading) {
+        CircularProgressIndicator(
+            modifier = Modifier
+                .width(25.dp)
+                .height(25.dp),
+            strokeWidth = 2.dp
+        )
+    } else if (cardNumberTextFieldState.trailingImageUrl.isNotBlank()) {
+        Image(
+            painter = rememberImagePainter(cardNumberTextFieldState.trailingImageUrl),
+            contentDescription = null,
+            modifier = Modifier
+                .width(50.dp)
+                .height(25.dp)
+        )
+    }
 }
 
 private fun isChanged(currentCardNumber: String, lastCheckedCardValue: String): Boolean {

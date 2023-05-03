@@ -5,6 +5,7 @@
 package com.ingenico.connect.android.example.kotlin.common.googlepay
 
 import android.app.Activity
+import android.util.Log
 import com.google.android.gms.wallet.PaymentsClient
 import com.google.android.gms.wallet.Wallet
 import com.google.android.gms.wallet.WalletConstants
@@ -153,6 +154,7 @@ class PaymentGooglePayUtil(
             isReadyToPayRequest
 
         } catch (e: JSONException) {
+            Log.e(javaClass.name, e.toString())
             null
         }
     }
@@ -186,6 +188,7 @@ class PaymentGooglePayUtil(
                 put("merchantInfo", merchantInfo)
             }
         } catch (e: JSONException) {
+            Log.e(javaClass.name, e.toString())
             null
         }
     }

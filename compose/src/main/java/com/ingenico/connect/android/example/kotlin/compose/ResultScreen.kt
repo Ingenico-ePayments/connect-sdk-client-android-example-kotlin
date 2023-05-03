@@ -5,7 +5,7 @@
 package com.ingenico.connect.android.example.kotlin.compose
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
@@ -14,7 +14,11 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TextButton
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalClipboardManager
@@ -47,67 +51,10 @@ fun ResultContent(
     onPrimaryButtonClicked: () -> Unit,
     encryptedFieldsData: String
 ) {
-    var showEncryptedFieldsData by remember { mutableStateOf(false) }
-    val clipboard = LocalClipboardManager.current
-    val scrollState = rememberScrollState()
-
     Scaffold(
         modifier = Modifier.padding(16.dp),
         content = {
-            Column(
-                modifier = Modifier
-                    .padding(it)
-                    .verticalScroll(scrollState)
-            ) {
-                Text(
-                    text = stringResource(id = R.string.payment_result_title),
-                    style = MaterialTheme.typography.h6
-                )
-                Text(
-                    text = stringResource(id = R.string.payment_result_explanation_text),
-                    modifier = Modifier.padding(top = 16.dp),
-                    style = MaterialTheme.typography.body2
-                )
-                TextButton(
-                    onClick = { showEncryptedFieldsData = true },
-                    modifier = Modifier
-                        .fillMaxWidth()
-                ) {
-                    Text(
-                        text = stringResource(id = R.string.payment_result_show_encrypted_fields_data),
-                        textAlign = TextAlign.Center,
-                        style = MaterialTheme.typography.body2,
-                        color = WorldlineMint
-                    )
-                }
-
-                if (showEncryptedFieldsData && encryptedFieldsData.isNotBlank()) {
-                    Text(
-                        text = stringResource(id = R.string.payment_result_encrypted_fields_data_title),
-                        modifier = Modifier.padding(top = 16.dp),
-                        style = MaterialTheme.typography.subtitle2
-                    )
-                    Text(
-                        text = encryptedFieldsData,
-                        modifier = Modifier.padding(top = 8.dp),
-                        style = MaterialTheme.typography.body2,
-                        fontSize = 11.sp
-                    )
-                    SecondaryButton(
-                        text = stringResource(id = R.string.payment_result_copy_encrypted_fields_data_to_clipboard),
-                        modifier = Modifier
-                            .padding(top = 16.dp)
-                            .align(alignment = Alignment.End),
-                        onSecondaryButtonClicked = {
-                            clipboard.setText(
-                                AnnotatedString(
-                                    encryptedFieldsData
-                                )
-                            )
-                        }
-                    )
-                }
-            }
+            ResultColumn(it, encryptedFieldsData)
         },
         bottomBar = {
             PrimaryButton(
@@ -118,6 +65,71 @@ fun ResultContent(
             )
         }
     )
+}
+
+@Composable
+fun ResultColumn(
+    paddingValues: PaddingValues,
+    encryptedFieldsData: String
+) {
+    var showEncryptedFieldsData by remember { mutableStateOf(false) }
+    val clipboard = LocalClipboardManager.current
+    val scrollState = rememberScrollState()
+
+    Column(
+        modifier = Modifier
+            .padding(paddingValues)
+            .verticalScroll(scrollState)
+    ) {
+        Text(
+            text = stringResource(id = R.string.payment_result_title),
+            style = MaterialTheme.typography.h6
+        )
+        Text(
+            text = stringResource(id = R.string.payment_result_explanation_text),
+            modifier = Modifier.padding(top = 16.dp),
+            style = MaterialTheme.typography.body2
+        )
+        TextButton(
+            onClick = { showEncryptedFieldsData = true },
+            modifier = Modifier
+                .fillMaxWidth()
+        ) {
+            Text(
+                text = stringResource(id = R.string.payment_result_show_encrypted_fields_data),
+                textAlign = TextAlign.Center,
+                style = MaterialTheme.typography.body2,
+                color = WorldlineMint
+            )
+        }
+
+        if (showEncryptedFieldsData && encryptedFieldsData.isNotBlank()) {
+            Text(
+                text = stringResource(id = R.string.payment_result_encrypted_fields_data_title),
+                modifier = Modifier.padding(top = 16.dp),
+                style = MaterialTheme.typography.subtitle2
+            )
+            Text(
+                text = encryptedFieldsData,
+                modifier = Modifier.padding(top = 8.dp),
+                style = MaterialTheme.typography.body2,
+                fontSize = 11.sp
+            )
+            SecondaryButton(
+                text = stringResource(id = R.string.payment_result_copy_encrypted_fields_data_to_clipboard),
+                modifier = Modifier
+                    .padding(top = 16.dp)
+                    .align(alignment = Alignment.End),
+                onSecondaryButtonClicked = {
+                    clipboard.setText(
+                        AnnotatedString(
+                            encryptedFieldsData
+                        )
+                    )
+                }
+            )
+        }
+    }
 }
 
 @Preview

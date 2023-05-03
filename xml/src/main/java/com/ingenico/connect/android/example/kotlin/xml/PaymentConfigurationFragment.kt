@@ -5,6 +5,7 @@
 package com.ingenico.connect.android.example.kotlin.xml
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,13 +23,17 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.google.gson.Gson
+import com.google.gson.JsonSyntaxException
 import com.ingenico.connect.gateway.sdk.client.android.sdk.model.AmountOfMoney
 import com.ingenico.connect.gateway.sdk.client.android.sdk.model.PaymentContext
-import java.util.*
+import java.util.Currency
+import java.util.Locale
 import com.ingenico.connect.android.example.kotlin.xml.utils.extentions.getCurrentLocale
-import com.ingenico.connect.android.example.kotlin.common.*
+import com.ingenico.connect.android.example.kotlin.common.PaymentScreen
+import com.ingenico.connect.android.example.kotlin.common.PaymentSharedViewModel
 import com.ingenico.connect.android.example.kotlin.xml.utils.extentions.deepForEach
 import com.ingenico.connect.gateway.sdk.client.android.ConnectSDK
+import com.ingenico.connect.gateway.sdk.client.android.ConnectSDKNotInitializedException
 import com.ingenico.connect.gateway.sdk.client.android.sdk.configuration.SessionConfiguration
 
 class PaymentConfigurationFragment : Fragment() {
@@ -115,41 +120,69 @@ class PaymentConfigurationFragment : Fragment() {
     private fun initInputFieldsDrawableEndClickListeners() {
         binding.apply {
             tilPaymentConfigurationClientSessionId.setEndIconOnClickListener {
-                showInputFieldExplanationTextBottomSheetDialog(getString(R.string.payment_configuration_client_session_id_helper_text))
+                showInputFieldExplanationTextBottomSheetDialog(
+                    getString(R.string.payment_configuration_client_session_id_helper_text)
+                )
             }
 
             tilPaymentConfigurationCustomerId.setEndIconOnClickListener {
-                showInputFieldExplanationTextBottomSheetDialog((getString(R.string.payment_configuration_customer_id_helper_text)))
+                showInputFieldExplanationTextBottomSheetDialog(
+                    getString(R.string.payment_configuration_customer_id_helper_text)
+                )
             }
 
             tilPaymentConfigurationClientApiUrl.setEndIconOnClickListener {
-                showInputFieldExplanationTextBottomSheetDialog(getString(R.string.payment_configuration_clientApiUrl_helper_text))
+                showInputFieldExplanationTextBottomSheetDialog(
+                    getString(R.string.payment_configuration_clientApiUrl_helper_text)
+                )
             }
 
             tilPaymentConfigurationAssetsUrl.setEndIconOnClickListener {
-                showInputFieldExplanationTextBottomSheetDialog(getString(R.string.payment_configuration_assetsUrl_helper_text))
+                showInputFieldExplanationTextBottomSheetDialog(
+                    getString(R.string.payment_configuration_assetsUrl_helper_text)
+                )
             }
 
             tilPaymentConfigurationAmount.setEndIconOnClickListener {
-                showInputFieldExplanationTextBottomSheetDialog(getString(R.string.payment_configuration_amount_helper_text))
+                showInputFieldExplanationTextBottomSheetDialog(
+                    getString(R.string.payment_configuration_amount_helper_text)
+                )
             }
+
             tilPaymentConfigurationCountryCode.setEndIconOnClickListener {
-                showInputFieldExplanationTextBottomSheetDialog(getString(R.string.payment_configuration_country_code_helper_text))
+                showInputFieldExplanationTextBottomSheetDialog(
+                    getString(R.string.payment_configuration_country_code_helper_text)
+                )
             }
+
             tilPaymentConfigurationCurrencyCode.setEndIconOnClickListener {
-                showInputFieldExplanationTextBottomSheetDialog(getString(R.string.payment_configuration_currency_code_helper_text))
+                showInputFieldExplanationTextBottomSheetDialog(
+                    getString(R.string.payment_configuration_currency_code_helper_text)
+                )
             }
+
             tilPaymentConfigurationMerchantId.setEndIconOnClickListener {
-                showInputFieldExplanationTextBottomSheetDialog(getString(R.string.payment_configuration_merchant_name_helper_text))
+                showInputFieldExplanationTextBottomSheetDialog(
+                    getString(R.string.payment_configuration_merchant_name_helper_text)
+                )
             }
+
             tilPaymentConfigurationMerchantName.setEndIconOnClickListener {
-                showInputFieldExplanationTextBottomSheetDialog(getString(R.string.payment_configuration_merchant_name_helper_text))
+                showInputFieldExplanationTextBottomSheetDialog(
+                    getString(R.string.payment_configuration_merchant_name_helper_text)
+                )
             }
+
             ivPaymentConfigurationRecurringPaymentHelperIcon.setOnClickListener {
-                showInputFieldExplanationTextBottomSheetDialog(getString(R.string.payment_configuration_recurring_payment_helper_text))
+                showInputFieldExplanationTextBottomSheetDialog(
+                    getString(R.string.payment_configuration_recurring_payment_helper_text)
+                )
             }
+
             ivPaymentConfigurationGroupPaymentProductsHelperIcon.setOnClickListener {
-                showInputFieldExplanationTextBottomSheetDialog(getString(R.string.payment_configuration_group_payment_products_helper_text))
+                showInputFieldExplanationTextBottomSheetDialog(
+                    getString(R.string.payment_configuration_group_payment_products_helper_text)
+                )
             }
         }
     }
@@ -157,70 +190,112 @@ class PaymentConfigurationFragment : Fragment() {
     private fun prefillPaymentConfigurationFields() {
         try {
                 binding.apply {
-                    etPaymentConfigurationClientSessionId.setText(ConnectSDK.getConnectSdkConfiguration().sessionConfiguration.clientSessionId)
-                    etPaymentConfigurationCustomerId.setText(ConnectSDK.getConnectSdkConfiguration().sessionConfiguration.customerId)
-                    etPaymentConfigurationClientApiUrl.setText(ConnectSDK.getConnectSdkConfiguration().sessionConfiguration.clientApiUrl)
-                    etPaymentConfigurationAssetsUrl.setText(ConnectSDK.getConnectSdkConfiguration().sessionConfiguration.assetUrl)
-                    etPaymentConfigurationAmount.setText(ConnectSDK.getPaymentConfiguration().paymentContext.amountOfMoney.amount.toString())
-                    etPaymentConfigurationCountryCode.setText(ConnectSDK.getPaymentConfiguration().paymentContext.countryCode)
-                    etPaymentConfigurationCurrencyCode.setText(ConnectSDK.getPaymentConfiguration().paymentContext.amountOfMoney.currencyCode)
-                    cbPaymentConfigurationGroupPaymentProducts.isChecked = ConnectSDK.getPaymentConfiguration().groupPaymentProducts
-                    cbPaymentConfigurationGooglePay.isChecked = paymentSharedViewModel.googlePayConfiguration.configureGooglePay
+                    etPaymentConfigurationClientSessionId.setText(
+                        ConnectSDK.getConnectSdkConfiguration().sessionConfiguration.clientSessionId
+                    )
+                    etPaymentConfigurationCustomerId.setText(
+                        ConnectSDK.getConnectSdkConfiguration().sessionConfiguration.customerId
+                    )
+                    etPaymentConfigurationClientApiUrl.setText(
+                        ConnectSDK.getConnectSdkConfiguration().sessionConfiguration.clientApiUrl
+                    )
+                    etPaymentConfigurationAssetsUrl.setText(
+                        ConnectSDK.getConnectSdkConfiguration().sessionConfiguration.assetUrl
+                    )
+                    etPaymentConfigurationAmount.setText(
+                        ConnectSDK.getPaymentConfiguration().paymentContext.amountOfMoney.amount.toString()
+                    )
+                    etPaymentConfigurationCountryCode.setText(
+                        ConnectSDK.getPaymentConfiguration().paymentContext.countryCode
+                    )
+                    etPaymentConfigurationCurrencyCode.setText(
+                        ConnectSDK.getPaymentConfiguration().paymentContext.amountOfMoney.currencyCode
+                    )
+                    cbPaymentConfigurationGroupPaymentProducts.isChecked =
+                        ConnectSDK.getPaymentConfiguration().groupPaymentProducts
+                    cbPaymentConfigurationGooglePay.isChecked =
+                        paymentSharedViewModel.googlePayConfiguration.configureGooglePay
                     etPaymentConfigurationMerchantId.setText(paymentSharedViewModel.googlePayConfiguration.merchantId)
-                    etPaymentConfigurationMerchantName.setText(paymentSharedViewModel.googlePayConfiguration.merchantName)
+                    etPaymentConfigurationMerchantName.setText(
+                        paymentSharedViewModel.googlePayConfiguration.merchantName
+                    )
                 }
-        } catch (exception: Exception) {
+        } catch (exception: ConnectSDKNotInitializedException) {
             // SDK is not initialized, fields are not prefilled
+            Log.e(javaClass.name, exception.toString())
         }
     }
 
     private fun validatePaymentConfiguration() {
         var isFormValid = true
         configurationInputFields.forEach {
-            if (it.second.text?.toString()?.isBlank() == true && it.first.id != binding.tilPaymentConfigurationMerchantId.id && it.first.id != binding.tilPaymentConfigurationMerchantName.id) {
-                it.first.error = getString(R.string.payment_configuration_field_not_valid_error)
-                isFormValid = false
-            }
+            isFormValid = isInputFieldValid(it)
+        }
 
-            if (binding.cbPaymentConfigurationGooglePay.isChecked) {
-                if (it.first.id == binding.tilPaymentConfigurationMerchantId.id || it.first.id == binding.tilPaymentConfigurationMerchantName.id) {
-                    if (it.second.text?.isBlank() == true) {
-                        it.first.error = getString(R.string.payment_configuration_field_not_valid_error)
-                        isFormValid = false
-                    }
+        if (isFormValid){
+            configureSDK()
+        }
+    }
+
+    private fun isInputFieldValid(textInput: Pair<TextInputLayout, TextInputEditText>): Boolean {
+        if (
+            textInput.second.text?.toString()?.isBlank() == true &&
+            textInput.first.id != binding.tilPaymentConfigurationMerchantId.id &&
+            textInput.first.id != binding.tilPaymentConfigurationMerchantName.id
+        ) {
+            textInput.first.error = getString(R.string.payment_configuration_field_not_valid_error)
+            return false
+        }
+
+        if (binding.cbPaymentConfigurationGooglePay.isChecked) {
+            if (
+                textInput.first.id == binding.tilPaymentConfigurationMerchantId.id ||
+                textInput.first.id == binding.tilPaymentConfigurationMerchantName.id
+            ) {
+                if (textInput.second.text?.isBlank() == true) {
+                    textInput.first.error = getString(R.string.payment_configuration_field_not_valid_error)
+                    return false
                 }
             }
         }
 
-        if (isFormValid){
-            val amount = try {
-                binding.etPaymentConfigurationAmount.text.toString().toLong()
-            } catch (e: NumberFormatException) {
-                0
-            }
-
-            if (binding.cbPaymentConfigurationGooglePay.isChecked){
-                paymentSharedViewModel.googlePayConfiguration = GooglePayConfiguration(true,  binding.etPaymentConfigurationMerchantId.text.toString(),  binding.etPaymentConfigurationMerchantName.text.toString())
-            }
-
-            paymentSharedViewModel.configureConnectSDK(SessionConfiguration(
-                binding.etPaymentConfigurationClientSessionId.text.toString(),
-                binding.etPaymentConfigurationCustomerId.text.toString(),
-                binding.etPaymentConfigurationClientApiUrl.text.toString(),
-                binding.etPaymentConfigurationAssetsUrl.text.toString()
-            ),
-                PaymentContext(
-                    AmountOfMoney(
-                        amount, binding.etPaymentConfigurationCurrencyCode.text.toString()
-                    ),
-                    binding.etPaymentConfigurationCountryCode.text.toString(),
-                    false,
-                    context?.getCurrentLocale()
-                ),
-                binding.cbPaymentConfigurationGroupPaymentProducts.isChecked
-            )
-        }
+        return true
     }
+
+    private fun configureSDK() {
+        val amount = try {
+            binding.etPaymentConfigurationAmount.text.toString().toLong()
+        } catch (e: NumberFormatException) {
+            0
+        }
+
+        if (binding.cbPaymentConfigurationGooglePay.isChecked){
+            paymentSharedViewModel.googlePayConfiguration =
+                GooglePayConfiguration(
+                    true,
+                    binding.etPaymentConfigurationMerchantId.text.toString(),
+                    binding.etPaymentConfigurationMerchantName.text.toString()
+                )
+        }
+
+        paymentSharedViewModel.configureConnectSDK(SessionConfiguration(
+            binding.etPaymentConfigurationClientSessionId.text.toString(),
+            binding.etPaymentConfigurationCustomerId.text.toString(),
+            binding.etPaymentConfigurationClientApiUrl.text.toString(),
+            binding.etPaymentConfigurationAssetsUrl.text.toString()
+        ),
+            PaymentContext(
+                AmountOfMoney(
+                    amount, binding.etPaymentConfigurationCurrencyCode.text.toString()
+                ),
+                binding.etPaymentConfigurationCountryCode.text.toString(),
+                false,
+                context?.getCurrentLocale()
+            ),
+            binding.cbPaymentConfigurationGroupPaymentProducts.isChecked
+        )
+    }
+
     private fun observePaymentSharedViewModel() {
         paymentSharedViewModel.paymentProductsStatus.observe(viewLifecycleOwner) { paymentProductStatus ->
             when (paymentProductStatus) {
@@ -235,7 +310,9 @@ class PaymentConfigurationFragment : Fragment() {
                     binding.btnPaymentConfigurationProceedToCheckout.showLoadingIndicator()
                 }
                 is Status.Success -> {
-                    findNavController().navigate(PaymentConfigurationFragmentDirections.navigateToPaymentProductFragment())
+                    findNavController().navigate(
+                        PaymentConfigurationFragmentDirections.navigateToPaymentProductFragment()
+                    )
                 }
                 is Status.Failed -> {
                     binding.clPaymentConfigurationInputForm.deepForEach { isEnabled = true }
@@ -249,6 +326,7 @@ class PaymentConfigurationFragment : Fragment() {
             }
         }
     }
+
     private fun parseJsonDataFromClipboard() {
         val jsonString = context?.getDataFromClipboard()
         try {
@@ -258,8 +336,9 @@ class PaymentConfigurationFragment : Fragment() {
                 binding.etPaymentConfigurationClientApiUrl.setText(this.clientApiUrl)
                 binding.etPaymentConfigurationAssetsUrl.setText(this.assetUrl)
             }
-        } catch (exception: Exception) {
+        } catch (exception: JsonSyntaxException) {
             paymentSharedViewModel.globalErrorMessage.value = "Json data from clipboard can't be parsed."
+            Log.e(javaClass.name, exception.toString())
         }
     }
 

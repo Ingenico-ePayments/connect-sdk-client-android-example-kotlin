@@ -48,7 +48,9 @@ class MainActivity : AppCompatActivity() {
         val currentFragment = navHostFragment.findNavController().currentDestination?.id
         when {
             currentFragment == R.id.payment_result_fragment -> {
-                navHostFragment.findNavController().navigate(PaymentResultFragmentDirections.navigateToPaymentConfigurationFragment())
+                navHostFragment.findNavController().navigate(
+                    PaymentResultFragmentDirections.navigateToPaymentConfigurationFragment()
+                )
             }
             navHostFragment.childFragmentManager.backStackEntryCount != 0 -> {
                 navHostFragment.findNavController().popBackStack()

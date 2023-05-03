@@ -59,7 +59,8 @@ class PaymentGooglePayFragment : BottomSheetDialogFragment() {
 
                     AutoResolveHelper.RESULT_ERROR -> {
                         AutoResolveHelper.getStatusFromIntent(data)?.let { status ->
-                            paymentSharedViewModel.globalErrorMessage.value = "Google pay loadPaymentData failed with error code: ${status.statusCode}"
+                            paymentSharedViewModel.globalErrorMessage.value =
+                                "Google pay loadPaymentData failed with error code: ${status.statusCode}"
                         }
                         dismiss()
                     }
@@ -72,7 +73,8 @@ class PaymentGooglePayFragment : BottomSheetDialogFragment() {
         paymentGooglePayViewModel.paymentProductStatus.observe(this) { paymentProductStatus ->
             when (paymentProductStatus) {
                 is Status.ApiError -> {
-                    paymentSharedViewModel.globalErrorMessage.value = paymentProductStatus.apiError.errors.first().message
+                    paymentSharedViewModel.globalErrorMessage.value =
+                        paymentProductStatus.apiError.errors.first().message
                 }
                 is Status.Loading -> {
                     // No loadingState needed for this fragment; Google pay has its own loading indicator
@@ -94,14 +96,18 @@ class PaymentGooglePayFragment : BottomSheetDialogFragment() {
         paymentGooglePayViewModel.encryptedPaymentRequestStatus.observe(this) { encryptedPaymentRequestStatus ->
             when (encryptedPaymentRequestStatus) {
                 is Status.ApiError -> {
-                    paymentSharedViewModel.globalErrorMessage.value = encryptedPaymentRequestStatus.apiError.errors.first().message
+                    paymentSharedViewModel.globalErrorMessage.value =
+                        encryptedPaymentRequestStatus.apiError.errors.first().message
                 }
                 is Status.Loading -> {
                     // No loadingState needed for this fragment; Google pay has its own loading indicator
                 }
                 is Status.Success -> {
-                    val encryptedFieldsData = (encryptedPaymentRequestStatus.data as EncryptedPaymentRequest).encryptedFields
-                    findNavController().navigate(PaymentGooglePayFragmentDirections.navigateToPaymentResultFragment(encryptedFieldsData))
+                    val encryptedFieldsData =
+                        (encryptedPaymentRequestStatus.data as EncryptedPaymentRequest).encryptedFields
+                    findNavController().navigate(
+                        PaymentGooglePayFragmentDirections.navigateToPaymentResultFragment(encryptedFieldsData)
+                    )
                 }
                 is Status.Failed -> {
                     paymentSharedViewModel.globalErrorMessage.value = encryptedPaymentRequestStatus.throwable.message
@@ -138,7 +144,11 @@ class PaymentGooglePayFragment : BottomSheetDialogFragment() {
         // Since loadPaymentData may show the UI asking the user to select a payment method, we use
         // AutoResolveHelper to wait for the user interacting with it. Once completed,
         // onActivityResult will be called with the result.
-        AutoResolveHelper.resolveTask(googlePayUtil.paymentsClient.loadPaymentData(request), requireActivity(), GOOGLE_PAY_REQUEST_CODE)
+        AutoResolveHelper.resolveTask(
+            googlePayUtil.paymentsClient.loadPaymentData(request),
+            requireActivity(),
+            GOOGLE_PAY_REQUEST_CODE
+        )
     }
 
     /**

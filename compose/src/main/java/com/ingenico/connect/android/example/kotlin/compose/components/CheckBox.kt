@@ -25,7 +25,11 @@ import androidx.compose.ui.unit.dp
 import com.ingenico.connect.android.example.kotlin.compose.R
 
 @Composable
-fun LabelledCheckbox(checkBoxField: CheckBoxField, onCheckedChange: ((Boolean) -> Unit)? = null, onTrailingIconClicked: (() -> Unit?)? = null) {
+fun LabelledCheckbox(
+    checkBoxField: CheckBoxField,
+    onCheckedChange: ((Boolean) -> Unit)? = null,
+    onTrailingIconClicked: (() -> Unit?)? = null
+) {
     if (checkBoxField.visible.value) {
         Row(Modifier
             .fillMaxWidth()) {

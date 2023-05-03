@@ -5,7 +5,7 @@
 package com.ingenico.connect.android.example.kotlin.common
 
 import android.content.Context
-import com.ingenico.connect.android.example.kotlin.common.utils.extenions.getStringByName
+import com.ingenico.connect.android.example.kotlin.common.utils.extensions.getStringByName
 import com.ingenico.connect.gateway.sdk.client.android.sdk.model.validation.ValidationErrorMessage
 import com.ingenico.connect.gateway.sdk.client.android.sdk.model.validation.ValidationRuleLength
 import com.ingenico.connect.gateway.sdk.client.android.sdk.model.validation.ValidationRuleRange
@@ -25,13 +25,18 @@ object PaymentCardValidationErrorMessageMapper {
     private const val VALIDATION_LENGTH_MAX_PLACEHOLDER = "{maxLength}"
 
     fun mapValidationErrorMessageToString(context: Context, validationErrorMessage: ValidationErrorMessage): String {
-        var errorMessage = context.getStringByName("$TRANSLATION_PREFIX_VALIDATION${validationErrorMessage.errorMessage}$TRANSLATION_POSTFIX_LABEL")
-            ?: validationErrorMessage.errorMessage
+        var errorMessage =
+            context.getStringByName(
+                "$TRANSLATION_PREFIX_VALIDATION${validationErrorMessage.errorMessage}$TRANSLATION_POSTFIX_LABEL"
+            ) ?: validationErrorMessage.errorMessage
         return when (val validationRule = validationErrorMessage.rule) {
             is ValidationRuleLength -> {
                 errorMessage =
-                    context.getStringByName("$TRANSLATION_PREFIX_VALIDATION${mapLengthExceptionToString(validationRule)}$TRANSLATION_POSTFIX_LABEL")
-                        ?: validationErrorMessage.errorMessage
+                    context.getStringByName(
+                        """
+                        $TRANSLATION_PREFIX_VALIDATION${mapLengthExceptionToString(validationRule)}$TRANSLATION_POSTFIX_LABEL 
+                        """.trimIndent()
+                    ) ?: validationErrorMessage.errorMessage
                 replaceLengthPlaceholders(errorMessage, validationRule.minLength, validationRule.maxLength)
             }
             is ValidationRuleRange -> {
@@ -45,7 +50,8 @@ object PaymentCardValidationErrorMessageMapper {
     }
 
     private fun replaceLengthPlaceholders(errorMessage: String, minLength: Int, maxLength: Int): String {
-        var errorMessageWithoutPlaceholders = errorMessage.replace(VALIDATION_LENGTH_MIN_PLACEHOLDER, minLength.toString())
+        var errorMessageWithoutPlaceholders =
+            errorMessage.replace(VALIDATION_LENGTH_MIN_PLACEHOLDER, minLength.toString())
         errorMessageWithoutPlaceholders = errorMessageWithoutPlaceholders.replace(
             VALIDATION_LENGTH_MAX_PLACEHOLDER, maxLength.toString())
         return errorMessageWithoutPlaceholders

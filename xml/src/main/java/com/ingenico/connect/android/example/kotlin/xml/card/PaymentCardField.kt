@@ -8,7 +8,6 @@ import android.content.Context
 import android.text.InputFilter
 import android.text.InputType
 import android.util.AttributeSet
-import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.ProgressBar
@@ -20,7 +19,11 @@ import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.ingenico.connect.gateway.sdk.client.android.sdk.model.paymentproduct.PaymentProductField
 import com.ingenico.connect.gateway.sdk.client.android.sdk.model.paymentproduct.displayhints.DisplayHintsProductFields
-import com.ingenico.connect.gateway.sdk.client.android.sdk.model.paymentproduct.displayhints.DisplayHintsProductFields.PreferredInputType.*
+import com.ingenico.connect.gateway.sdk.client.android.sdk.model.paymentproduct.displayhints.DisplayHintsProductFields.PreferredInputType.DATE_PICKER
+import com.ingenico.connect.gateway.sdk.client.android.sdk.model.paymentproduct.displayhints.DisplayHintsProductFields.PreferredInputType.EMAIL_ADDRESS_KEYBOARD
+import com.ingenico.connect.gateway.sdk.client.android.sdk.model.paymentproduct.displayhints.DisplayHintsProductFields.PreferredInputType.INTEGER_KEYBOARD
+import com.ingenico.connect.gateway.sdk.client.android.sdk.model.paymentproduct.displayhints.DisplayHintsProductFields.PreferredInputType.PHONE_NUMBER_KEYBOARD
+import com.ingenico.connect.gateway.sdk.client.android.sdk.model.paymentproduct.displayhints.DisplayHintsProductFields.PreferredInputType.STRING_KEYBOARD
 import com.squareup.picasso.Picasso
 
 /**
@@ -53,8 +56,6 @@ class PaymentCardField(context: Context, attributeSet: AttributeSet) : Constrain
         context.theme.obtainStyledAttributes(attributeSet, R.styleable.PaymentCardField, 0, 0).apply {
             try {
                 cardFieldTextInputLayout.startIconDrawable = getDrawable(R.styleable.PaymentCardField_startIcon)
-            } catch (exception: Exception) {
-                Log.e(javaClass.name, exception.toString())
             } finally {
                 recycle()
             }
@@ -65,7 +66,10 @@ class PaymentCardField(context: Context, attributeSet: AttributeSet) : Constrain
      * Init function for this field.
      * Essential for the proper functioning of this field.
      */
-    fun setPaymentProductField(paymentProductField: PaymentProductField, cardFieldAfterTextChangedListener: CardFieldAfterTextChangedListener) {
+    fun setPaymentProductField(
+        paymentProductField: PaymentProductField,
+        cardFieldAfterTextChangedListener: CardFieldAfterTextChangedListener
+    ) {
         this.paymentProductField = paymentProductField
         this.cardFieldAfterTextChangedListener = cardFieldAfterTextChangedListener
         cardField.visibility = View.VISIBLE

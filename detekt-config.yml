@@ -1,0 +1,26 @@
+style:
+    excludes: ['**/common/build/**', '**/compose/build/**', '**/xml/build/**']
+    MagicNumber:
+        active: false
+    ReturnCount:
+        active: false
+
+complexity:
+    LongMethod:
+        excludes: ['**/compose/ComposeApp.kt']
+    LongParameterList:
+        excludes: [
+            '**/compose/ComposeApp.kt',
+            '**/compose/card/CardScreen.kt'
+        ]
+        ignoreDefaultParameters: true
+    TooManyFunctions:
+        active: false
+
+naming:
+    FunctionNaming:
+        ignoreAnnotated: ['Composable']
+
+empty-blocks:
+    EmptyFunctionBlock:
+        ignoreOverridden: true
