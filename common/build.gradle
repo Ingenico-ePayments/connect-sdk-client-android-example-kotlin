@@ -8,6 +8,8 @@ plugins {
 }
 
 android {
+    namespace 'com.ingenico.connect.android.example.kotlin.common'
+
     compileSdk 33
 
     defaultConfig {
@@ -15,7 +17,16 @@ android {
         targetSdk 33
     }
 
-    lintOptions {
+    compileOptions {
+        sourceCompatibility java_version
+        targetCompatibility java_version
+    }
+
+    kotlinOptions {
+        jvmTarget = kotlin_jvm_target
+    }
+
+    lint {
         abortOnError false
         lintConfig file('lint.xml')
     }

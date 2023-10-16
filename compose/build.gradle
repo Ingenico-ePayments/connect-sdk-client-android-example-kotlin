@@ -8,6 +8,8 @@ plugins {
 }
 
 android {
+    namespace 'com.ingenico.connect.android.example.kotlin.compose'
+
     compileSdk 33
 
     defaultConfig {
@@ -28,33 +30,33 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.4.0"
+        kotlinCompilerExtensionVersion = "1.4.8"
     }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
-
-    lintOptions {
-        abortOnError false
-        lintConfig file('lint.xml')
+        sourceCompatibility java_version
+        targetCompatibility java_version
     }
 
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = kotlin_jvm_target
     }
 
     packagingOptions {
         resources {
             excludes += '/META-INF/{AL2.0,LGPL2.1}'
         }
+    }
+
+    lint {
+        abortOnError false
+        lintConfig file('lint.xml')
     }
 }
 
@@ -78,9 +80,9 @@ dependencies {
     implementation "androidx.compose.ui:ui:$compose_version"
     implementation "androidx.compose.material:material:$compose_material_version"
     implementation "androidx.compose.ui:ui-tooling-preview:$compose_version"
-    implementation 'androidx.activity:activity-compose:1.6.1'
-    implementation 'com.google.accompanist:accompanist-insets:0.24.1-alpha'
-    implementation 'com.google.accompanist:accompanist-navigation-animation:0.21.2-beta'
+    implementation 'androidx.activity:activity-compose:1.7.2'
+    implementation "com.google.accompanist:accompanist-insets:$google_accompanist_version"
+    implementation "com.google.accompanist:accompanist-navigation-animation:$google_accompanist_version"
     implementation "androidx.compose.material:material-icons-extended:$compose_material_version"
     implementation "androidx.compose.runtime:runtime-livedata:$compose_version"
     debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"

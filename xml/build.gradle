@@ -10,6 +10,8 @@ plugins {
 }
 
 android {
+    namespace 'com.ingenico.connect.android.example.kotlin.xml'
+
     compileSdk 33
 
     buildFeatures {
@@ -24,6 +26,15 @@ android {
         versionName "1.0"
     }
 
+    compileOptions {
+        sourceCompatibility java_version
+        targetCompatibility java_version
+    }
+
+    kotlinOptions {
+        jvmTarget = kotlin_jvm_target
+    }
+
     buildTypes {
         release {
             minifyEnabled true
@@ -31,7 +42,7 @@ android {
         }
     }
 
-    lintOptions {
+    lint {
         abortOnError false
         lintConfig file('lint.xml')
     }

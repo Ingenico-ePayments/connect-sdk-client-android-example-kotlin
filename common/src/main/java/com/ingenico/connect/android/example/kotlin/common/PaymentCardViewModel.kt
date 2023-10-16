@@ -249,7 +249,7 @@ class PaymentCardViewModel(application: Application) : AndroidViewModel(applicat
      * When a field is changed validate it.
      */
     fun fieldChanged(paymentProductField: PaymentProductField, value: String) {
-        updateValueInPaymentRequest(paymentProductField.id, value)
+        updateValueInPaymentRequest(paymentProductField, value)
         if (liveFormValidating) {
            validateAllFields()
         } else {
@@ -268,7 +268,9 @@ class PaymentCardViewModel(application: Application) : AndroidViewModel(applicat
      * When a field is changed, it must also be updated in the payment request object
      * so that the correct input is used when validating or preparing a payment.
      */
-    fun updateValueInPaymentRequest(paymentProductFieldId: String, value: String) {
+    fun updateValueInPaymentRequest(paymentProductField: PaymentProductField, value: String) {
+        val paymentProductFieldId = paymentProductField.id
+
         if (paymentRequest.accountOnFile != null) {
             if (
                 paymentRequest.accountOnFile.attributes.firstOrNull {
@@ -279,7 +281,8 @@ class PaymentCardViewModel(application: Application) : AndroidViewModel(applicat
                 paymentRequest.setValue(paymentProductFieldId, value)
             }
         } else {
-            paymentRequest.setValue(paymentProductFieldId, value)
+            val unmaskedValue = paymentProductField.removeMask(value)
+            paymentRequest.setValue(paymentProductFieldId, unmaskedValue)
         }
     }
 

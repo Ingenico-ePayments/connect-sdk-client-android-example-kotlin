@@ -176,22 +176,30 @@ private fun updateValuesOnSuccessUIState(
         accountOnFile = paymentFields.accountOnFile,
     )
 
-    paymentCardViewModel.updateValueInPaymentRequest(
-        cardFields.cardNumberField.id,
-        cardFields.cardNumberField.text
-    )
-    paymentCardViewModel.updateValueInPaymentRequest(
-        cardFields.expiryDateField.id,
-        cardFields.expiryDateField.text
-    )
-    paymentCardViewModel.updateValueInPaymentRequest(
-        cardFields.securityNumberField.id,
-        cardFields.securityNumberField.text
-    )
-    paymentCardViewModel.updateValueInPaymentRequest(
-        cardFields.cardHolderField.id,
-        cardFields.cardHolderField.text
-    )
+    cardFields.cardNumberField.paymentProductField?.let { paymentProductField ->
+        paymentCardViewModel.updateValueInPaymentRequest(
+            paymentProductField,
+            cardFields.cardNumberField.text
+        )
+    }
+    cardFields.expiryDateField.paymentProductField?.let { paymentProductField ->
+        paymentCardViewModel.updateValueInPaymentRequest(
+            paymentProductField,
+            cardFields.expiryDateField.text
+        )
+    }
+    cardFields.securityNumberField.paymentProductField?.let { paymentProductField ->
+        paymentCardViewModel.updateValueInPaymentRequest(
+            paymentProductField,
+            cardFields.securityNumberField.text
+        )
+    }
+    cardFields.cardHolderField.paymentProductField?.let { paymentProductField ->
+        paymentCardViewModel.updateValueInPaymentRequest(
+            paymentProductField,
+            cardFields.cardHolderField.text
+        )
+    }
 
     paymentCardViewModel.shouldEnablePayButton()
 }
