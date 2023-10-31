@@ -30,6 +30,18 @@ android {
         abortOnError false
         lintConfig file('lint.xml')
     }
+
+    buildTypes {
+        debug {
+            buildConfigField "Boolean", "LOGGING_ENABLED", 'false'
+        }
+        // To disable logging in production, you can set the LOGGING_ENABLED field to false in a release build of your app
+        /*
+        release {
+            buildConfigField "Boolean", "LOGGING_ENABLED", 'false'
+        }
+        */
+    }
 }
 
 dependencies {
