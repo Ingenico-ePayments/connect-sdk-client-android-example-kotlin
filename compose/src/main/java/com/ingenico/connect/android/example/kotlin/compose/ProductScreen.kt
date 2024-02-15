@@ -26,7 +26,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import coil.compose.rememberImagePainter
+import coil.compose.rememberAsyncImagePainter
 import com.ingenico.connect.android.example.kotlin.common.PaymentScreen
 import com.ingenico.connect.android.example.kotlin.common.PaymentSharedViewModel
 import com.ingenico.connect.android.example.kotlin.common.utils.Status
@@ -115,12 +115,16 @@ private fun PaymentProductItems(
             items(basicPaymentItems.accountsOnFile) { accountOnFile ->
                 PaymentProductItem(
                     imageUrl = assetsBaseUrl + accountOnFile.displayHints.logo,
-                    label = StringFormatter().applyMask(
-                        accountOnFile.displayHints.labelTemplate[0].mask.replace(
-                            "9",
-                            "*"
-                        ), accountOnFile.label
-                    ),
+                    label = accountOnFile.displayHints.labelTemplate[0].mask?.let { mask ->
+                        StringFormatter().applyMask(
+                            mask.replace(
+                                "9",
+                                "*"
+                            ),
+                            accountOnFile.label
+                        )} ?: run {
+                            accountOnFile.label
+                        },
                     onItemClicked = {
                         onItemClicked(accountOnFile)
                     }
@@ -165,7 +169,7 @@ private fun PaymentProductItem(imageUrl: String, label: String, onItemClicked: (
             .clickable { onItemClicked() }) {
         Row(modifier = Modifier.padding(12.dp).fillMaxWidth()) {
             Image(
-                painter = rememberImagePainter(imageUrl),
+                painter = rememberAsyncImagePainter(imageUrl),
                 contentDescription = null,
                 modifier = Modifier
                     .width(50.dp)

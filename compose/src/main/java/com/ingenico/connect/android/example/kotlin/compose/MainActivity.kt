@@ -151,7 +151,7 @@ class MainActivity : ComponentActivity() {
      * After the user has successfully completed the Google Pay steps fetch token data and prepare a payment
      */
     private fun handleGooglePaySuccess(paymentData: PaymentData) {
-        val paymentInformation = paymentData.toJson() ?: return
+        val paymentInformation = paymentData.toJson()
 
         try {
             // Token will be null if PaymentDataRequest was not constructed using fromJson(String).

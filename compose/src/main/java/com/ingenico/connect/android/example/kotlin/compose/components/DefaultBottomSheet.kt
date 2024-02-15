@@ -19,7 +19,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import coil.compose.rememberImagePainter
+import coil.compose.rememberAsyncImagePainter
 import com.ingenico.connect.android.example.kotlin.compose.extensions.convertToString
 
 @Composable
@@ -53,7 +53,7 @@ fun DefaultBottomSheet(bottomSheetContent: BottomSheetContent) {
             bottomSheetContent.imageUrl?.let {
                 Column(Modifier.weight(1f)) {
                     Image(
-                        painter = rememberImagePainter(it),
+                        painter = rememberAsyncImagePainter(it),
                         contentDescription = null,
                         modifier = Modifier
                             .width(180.dp)

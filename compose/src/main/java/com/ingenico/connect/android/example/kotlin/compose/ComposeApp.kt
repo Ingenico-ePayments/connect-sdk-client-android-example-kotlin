@@ -4,12 +4,13 @@
 
 package com.ingenico.connect.android.example.kotlin.compose
 
-import androidx.compose.animation.AnimatedContentScope
+import androidx.compose.animation.AnimatedContentTransitionScope
 import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.ExitTransition
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.ModalBottomSheetLayout
@@ -30,8 +31,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.NavHost
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.ingenico.connect.android.example.kotlin.compose.card.CardScreen
 import com.ingenico.connect.android.example.kotlin.compose.components.BottomSheetContent
 import com.ingenico.connect.android.example.kotlin.compose.components.DefaultBottomSheet
@@ -39,10 +43,6 @@ import com.ingenico.connect.android.example.kotlin.compose.components.Header
 import com.ingenico.connect.android.example.kotlin.compose.configuration.ConfigurationScreen
 import com.ingenico.connect.android.example.kotlin.compose.configuration.ConfigurationViewModel
 import com.ingenico.connect.android.example.kotlin.compose.theme.ComposeTheme
-import com.google.accompanist.insets.systemBarsPadding
-import com.google.accompanist.navigation.animation.AnimatedNavHost
-import com.google.accompanist.navigation.animation.composable
-import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.ingenico.connect.android.example.kotlin.common.PaymentScreen
 import com.ingenico.connect.android.example.kotlin.common.PaymentSharedViewModel
 import kotlinx.coroutines.launch
@@ -54,7 +54,7 @@ import kotlinx.coroutines.launch
 )
 @Composable
 fun ComposeApp(paymentSharedViewModel: PaymentSharedViewModel, launchGooglePay: () -> Unit) {
-    val navController = rememberAnimatedNavController()
+    val navController = rememberNavController()
     val coroutineScope = rememberCoroutineScope()
 
     val configurationViewModel: ConfigurationViewModel = viewModel()
@@ -119,7 +119,7 @@ private fun AnimatedNavigation(
     showBottomSheet: (BottomSheetContent) -> Unit,
     launchGooglePay: () -> Unit
 ) {
-    AnimatedNavHost(
+    NavHost(
         navController = navController,
         modifier = modifier,
         startDestination = PaymentScreen.CONFIGURATION.route
@@ -186,11 +186,11 @@ private fun AnimatedNavigation(
 }
 
 @ExperimentalAnimationApi
-private fun enterTransitionConfigurationRoute(scope: AnimatedContentScope<NavBackStackEntry>): EnterTransition? {
+private fun enterTransitionConfigurationRoute(scope: AnimatedContentTransitionScope<NavBackStackEntry>): EnterTransition? {
     return when (scope.initialState.destination.route) {
         PaymentScreen.PRODUCT.route ->
             scope.slideIntoContainer(
-                AnimatedContentScope.SlideDirection.Right,
+                AnimatedContentTransitionScope.SlideDirection.Right,
                 animationSpec = tween(700)
             )
         else -> null
@@ -198,11 +198,11 @@ private fun enterTransitionConfigurationRoute(scope: AnimatedContentScope<NavBac
 }
 
 @ExperimentalAnimationApi
-private fun exitTransitionConfigurationRoute(scope: AnimatedContentScope<NavBackStackEntry>): ExitTransition? {
+private fun exitTransitionConfigurationRoute(scope: AnimatedContentTransitionScope<NavBackStackEntry>): ExitTransition? {
     return when (scope.targetState.destination.route) {
         PaymentScreen.PRODUCT.route ->
             scope.slideOutOfContainer(
-                AnimatedContentScope.SlideDirection.Left,
+                AnimatedContentTransitionScope.SlideDirection.Left,
                 animationSpec = tween(700)
             )
         else -> null
@@ -210,16 +210,16 @@ private fun exitTransitionConfigurationRoute(scope: AnimatedContentScope<NavBack
 }
 
 @ExperimentalAnimationApi
-private fun enterTransitionProductRoute(scope: AnimatedContentScope<NavBackStackEntry>): EnterTransition? {
+private fun enterTransitionProductRoute(scope: AnimatedContentTransitionScope<NavBackStackEntry>): EnterTransition? {
     return when (scope.initialState.destination.route) {
         PaymentScreen.CONFIGURATION.route ->
             scope.slideIntoContainer(
-                AnimatedContentScope.SlideDirection.Left,
+                AnimatedContentTransitionScope.SlideDirection.Left,
                 animationSpec = tween(700)
             )
         PaymentScreen.CARD.route ->
             scope.slideIntoContainer(
-                AnimatedContentScope.SlideDirection.Right,
+                AnimatedContentTransitionScope.SlideDirection.Right,
                 animationSpec = tween(700)
             )
         else -> null
@@ -227,16 +227,16 @@ private fun enterTransitionProductRoute(scope: AnimatedContentScope<NavBackStack
 }
 
 @ExperimentalAnimationApi
-private fun exitTransitionProductRoute(scope: AnimatedContentScope<NavBackStackEntry>): ExitTransition? {
+private fun exitTransitionProductRoute(scope: AnimatedContentTransitionScope<NavBackStackEntry>): ExitTransition? {
     return when (scope.targetState.destination.route) {
         PaymentScreen.CONFIGURATION.route ->
             scope.slideOutOfContainer(
-                AnimatedContentScope.SlideDirection.Right,
+                AnimatedContentTransitionScope.SlideDirection.Right,
                 animationSpec = tween(700)
             )
         PaymentScreen.CARD.route ->
             scope.slideOutOfContainer(
-                AnimatedContentScope.SlideDirection.Left,
+                AnimatedContentTransitionScope.SlideDirection.Left,
                 animationSpec = tween(700)
             )
         else -> null
@@ -244,16 +244,16 @@ private fun exitTransitionProductRoute(scope: AnimatedContentScope<NavBackStackE
 }
 
 @ExperimentalAnimationApi
-private fun enterTransitionCardRoute(scope: AnimatedContentScope<NavBackStackEntry>): EnterTransition? {
+private fun enterTransitionCardRoute(scope: AnimatedContentTransitionScope<NavBackStackEntry>): EnterTransition? {
     return when (scope.initialState.destination.route) {
         PaymentScreen.PRODUCT.route ->
             scope.slideIntoContainer(
-                AnimatedContentScope.SlideDirection.Left,
+                AnimatedContentTransitionScope.SlideDirection.Left,
                 animationSpec = tween(700)
             )
         PaymentScreen.RESULT.route ->
             scope.slideIntoContainer(
-                AnimatedContentScope.SlideDirection.Right,
+                AnimatedContentTransitionScope.SlideDirection.Right,
                 animationSpec = tween(700)
             )
         else -> null
@@ -261,16 +261,16 @@ private fun enterTransitionCardRoute(scope: AnimatedContentScope<NavBackStackEnt
 }
 
 @ExperimentalAnimationApi
-private fun exitTransitionCardRoute(scope: AnimatedContentScope<NavBackStackEntry>): ExitTransition? {
+private fun exitTransitionCardRoute(scope: AnimatedContentTransitionScope<NavBackStackEntry>): ExitTransition? {
     return when (scope.targetState.destination.route) {
         PaymentScreen.PRODUCT.route ->
             scope.slideOutOfContainer(
-                AnimatedContentScope.SlideDirection.Right,
+                AnimatedContentTransitionScope.SlideDirection.Right,
                 animationSpec = tween(700)
             )
         PaymentScreen.RESULT.route ->
             scope.slideOutOfContainer(
-                AnimatedContentScope.SlideDirection.Left,
+                AnimatedContentTransitionScope.SlideDirection.Left,
                 animationSpec = tween(700)
             )
         else -> null
@@ -278,11 +278,11 @@ private fun exitTransitionCardRoute(scope: AnimatedContentScope<NavBackStackEntr
 }
 
 @ExperimentalAnimationApi
-private fun enterTransitionResultRoute(scope: AnimatedContentScope<NavBackStackEntry>): EnterTransition? {
+private fun enterTransitionResultRoute(scope: AnimatedContentTransitionScope<NavBackStackEntry>): EnterTransition? {
     return when (scope.initialState.destination.route) {
         PaymentScreen.CARD.route ->
             scope.slideIntoContainer(
-                AnimatedContentScope.SlideDirection.Left,
+                AnimatedContentTransitionScope.SlideDirection.Left,
                 animationSpec = tween(700)
             )
         else -> null
@@ -290,11 +290,11 @@ private fun enterTransitionResultRoute(scope: AnimatedContentScope<NavBackStackE
 }
 
 @ExperimentalAnimationApi
-private fun exitTransitionResultRoute(scope: AnimatedContentScope<NavBackStackEntry>): ExitTransition? {
+private fun exitTransitionResultRoute(scope: AnimatedContentTransitionScope<NavBackStackEntry>): ExitTransition? {
     return when (scope.targetState.destination.route) {
         PaymentScreen.CARD.route ->
             scope.slideOutOfContainer(
-                AnimatedContentScope.SlideDirection.Right,
+                AnimatedContentTransitionScope.SlideDirection.Right,
                 animationSpec = tween(700)
             )
         else -> null

@@ -7,6 +7,7 @@ package com.ingenico.connect.android.example.kotlin.xml
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
@@ -42,23 +43,25 @@ class MainActivity : AppCompatActivity() {
         }
 
         initStepIndicator()
+        setOnBackPressedListener();
     }
 
-    override fun onBackPressed() {
-        val currentFragment = navHostFragment.findNavController().currentDestination?.id
-        when {
-            currentFragment == R.id.payment_result_fragment -> {
-                navHostFragment.findNavController().navigate(
-                    PaymentResultFragmentDirections.navigateToPaymentConfigurationFragment()
-                )
+    private fun setOnBackPressedListener() {
+        onBackPressedDispatcher.addCallback(this, object: OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                val currentFragment = navHostFragment.findNavController().currentDestination?.id
+                when {
+                    currentFragment == R.id.payment_result_fragment -> {
+                        navHostFragment.findNavController().navigate(
+                            PaymentResultFragmentDirections.navigateToPaymentConfigurationFragment()
+                        )
+                    }
+                    navHostFragment.childFragmentManager.backStackEntryCount != 0 -> {
+                        navHostFragment.findNavController().popBackStack()
+                    }
+                }
             }
-            navHostFragment.childFragmentManager.backStackEntryCount != 0 -> {
-                navHostFragment.findNavController().popBackStack()
-            }
-            else -> {
-                super.onBackPressed()
-            }
-        }
+        })
     }
 
     /**

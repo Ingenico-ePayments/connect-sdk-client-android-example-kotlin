@@ -10,11 +10,10 @@ plugins {
 android {
     namespace 'com.ingenico.connect.android.example.kotlin.common'
 
-    compileSdk 33
-
     defaultConfig {
         minSdk 21
-        targetSdk 33
+        compileSdk 34
+        targetSdk 34
     }
 
     compileOptions {
@@ -26,6 +25,10 @@ android {
         jvmTarget = kotlin_jvm_target
     }
 
+    buildFeatures {
+        buildConfig = true
+    }
+
     lint {
         abortOnError false
         lintConfig file('lint.xml')
@@ -33,7 +36,7 @@ android {
 
     buildTypes {
         debug {
-            buildConfigField "Boolean", "LOGGING_ENABLED", 'false'
+            buildConfigField "Boolean", "LOGGING_ENABLED", 'true'
         }
         // To disable logging in production, you can set the LOGGING_ENABLED field to false in a release build of your app
         /*
@@ -48,7 +51,6 @@ dependencies {
     // Kotlin
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
     implementation "com.google.code.gson:gson:$gson_version"
-    implementation 'org.apache.commons:commons-lang3:3.12.0'
     // Android X
     implementation "androidx.core:core-ktx:$core_version"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"

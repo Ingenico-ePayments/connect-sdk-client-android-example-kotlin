@@ -41,8 +41,8 @@ open class TextFieldState(
 sealed class IsValid(
     val errorMessage: Any? = null
 ) {
-    object Yes : IsValid()
+    data object Yes : IsValid()
     class No(errorMessage: Any) : IsValid(errorMessage)
-    object Unknown : IsValid()
+    data object Unknown : IsValid()
 }
 

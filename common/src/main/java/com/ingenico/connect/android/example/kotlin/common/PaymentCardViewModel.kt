@@ -309,8 +309,8 @@ class PaymentCardViewModel(application: Application) : AndroidViewModel(applicat
 }
 
 sealed class PaymentCardUiState {
-    object Loading : PaymentCardUiState()
-    object None: PaymentCardUiState()
+    data object Loading : PaymentCardUiState()
+    data object None: PaymentCardUiState()
     class ApiError(val apiError: ApiErrorResponse) : PaymentCardUiState()
     class Failed(val throwable: Throwable) : PaymentCardUiState()
     class IinFailed(val throwable: Throwable) : PaymentCardUiState()

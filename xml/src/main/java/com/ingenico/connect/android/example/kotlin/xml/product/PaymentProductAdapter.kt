@@ -71,9 +71,11 @@ class PaymentProductAdapter(
                     .load(baseAssetsUrl.plus(accountOnFile.displayHints.logo))
                     .into(binding.ivPaymentProductLogo)
 
-                accountOnFile.displayHints.labelTemplate[0].mask?.let { mask ->
+                binding.tvPaymentProductLabel.text = accountOnFile.displayHints.labelTemplate[0].mask?.let { mask ->
                     val formattedValue = StringFormatter().applyMask(mask.replace("9", "*"), accountOnFile.label)
-                    binding.tvPaymentProductLabel.text = formattedValue
+                    formattedValue
+                } ?: run {
+                    accountOnFile.label
                 }
                 binding.paymentProductItem.setOnClickListener { onAccountOnFileClicked?.invoke(accountOnFile) }
             }

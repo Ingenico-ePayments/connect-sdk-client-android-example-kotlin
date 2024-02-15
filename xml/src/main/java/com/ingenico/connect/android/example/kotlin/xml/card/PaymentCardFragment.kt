@@ -210,11 +210,11 @@ class PaymentCardFragment : Fragment() {
     private fun observeEncryptedPaymentRequestStatus() {
         paymentCardViewModel.encryptedPaymentRequestStatus.observe(
             viewLifecycleOwner
-        ) { EncryptedPaymentRequestStatus ->
-            when (EncryptedPaymentRequestStatus) {
+        ) { encryptedPaymentRequestStatus ->
+            when (encryptedPaymentRequestStatus) {
                 is Status.ApiError -> {
                     paymentSharedViewModel.globalErrorMessage.value =
-                        EncryptedPaymentRequestStatus.apiError.errors.first().message
+                        encryptedPaymentRequestStatus.apiError.errors.first().message
                     binding.clPaymentCardInputForm.deepForEach { isEnabled = true }
                     binding.btnPaymentCardPayProduct.hideLoadingIndicator()
                 }
@@ -224,13 +224,13 @@ class PaymentCardFragment : Fragment() {
                 }
                 is Status.Success -> {
                     val encryptedFieldsData =
-                        (EncryptedPaymentRequestStatus.data as EncryptedPaymentRequest).encryptedFields
+                        (encryptedPaymentRequestStatus.data as EncryptedPaymentRequest).encryptedFields
                     findNavController().navigate(
                         PaymentCardFragmentDirections.navigateToPaymentResultFragment(encryptedFieldsData)
                     )
                 }
                 is Status.Failed -> {
-                    paymentSharedViewModel.globalErrorMessage.value = EncryptedPaymentRequestStatus.throwable.message
+                    paymentSharedViewModel.globalErrorMessage.value = encryptedPaymentRequestStatus.throwable.message
                     binding.clPaymentCardInputForm.deepForEach { isEnabled = true }
                     binding.btnPaymentCardPayProduct.hideLoadingIndicator()
                 }

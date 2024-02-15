@@ -13,6 +13,6 @@ sealed class Status {
     data class Success(val data: Any?) : Status()
     data class Failed(val throwable: Throwable) : Status()
     data class ApiError(val apiError: ApiErrorResponse) : Status()
-    object Loading : Status()
-    object None: Status()
+    data object Loading : Status()
+    data object None: Status()
 }

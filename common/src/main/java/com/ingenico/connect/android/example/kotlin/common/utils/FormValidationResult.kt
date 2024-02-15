@@ -12,6 +12,6 @@ import com.ingenico.connect.gateway.sdk.client.android.sdk.model.validation.Vali
 sealed class FormValidationResult {
     data class Invalid(val exceptions: List<Exception>?) : FormValidationResult()
     data class InvalidWithValidationErrorMessage(val exceptions: List<ValidationErrorMessage>) : FormValidationResult()
-    object Valid : FormValidationResult()
-    object NotValidated: FormValidationResult()
+    data object Valid : FormValidationResult()
+    data object NotValidated: FormValidationResult()
 }

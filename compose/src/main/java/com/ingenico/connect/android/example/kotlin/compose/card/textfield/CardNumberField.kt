@@ -20,7 +20,7 @@ import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import coil.compose.rememberImagePainter
+import coil.compose.rememberAsyncImagePainter
 import com.ingenico.connect.android.example.kotlin.compose.card.CardFieldVisualTransformation
 import com.ingenico.connect.android.example.kotlin.compose.components.OutlinedTextFieldWithError
 import com.ingenico.connect.android.example.kotlin.compose.extensions.convertToString
@@ -94,7 +94,7 @@ fun CardNumberField(
 }
 
 @Composable
-private fun TrailingIcon(cardNumberTextFieldState: CardNumberTextFieldState,) {
+private fun TrailingIcon(cardNumberTextFieldState: CardNumberTextFieldState) {
     if (cardNumberTextFieldState.isLoading) {
         CircularProgressIndicator(
             modifier = Modifier
@@ -104,7 +104,7 @@ private fun TrailingIcon(cardNumberTextFieldState: CardNumberTextFieldState,) {
         )
     } else if (cardNumberTextFieldState.trailingImageUrl.isNotBlank()) {
         Image(
-            painter = rememberImagePainter(cardNumberTextFieldState.trailingImageUrl),
+            painter = rememberAsyncImagePainter(cardNumberTextFieldState.trailingImageUrl),
             contentDescription = null,
             modifier = Modifier
                 .width(50.dp)

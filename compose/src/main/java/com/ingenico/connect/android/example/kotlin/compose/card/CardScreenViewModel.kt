@@ -36,7 +36,7 @@ class CardScreenViewModel(application: Application) : AndroidViewModel(applicati
     var cardFields by mutableStateOf(CardFields())
         private set
 
-    var isAccountOnFileDataLoaded = false
+    private var isAccountOnFileDataLoaded = false
 
     /**
      * When the payment product fields properties change.
@@ -192,11 +192,13 @@ class CardScreenViewModel(application: Application) : AndroidViewModel(applicati
             accountOnFile.attributes.firstOrNull { it.key == paymentProductFieldId }
                 ?.let { attribute ->
                     textFieldState.text = if (paymentProductFieldId == cardFields.cardNumberField.id) {
-                        cardFields.cardNumberField.mask =
-                            accountOnFile.displayHints.labelTemplate[0].mask.replace(
-                                "9",
-                                "*"
-                            )
+                        accountOnFile.displayHints.labelTemplate[0].mask?.let { mask ->
+                            cardFields.cardNumberField.mask =
+                                mask.replace(
+                                    "9",
+                                    "*"
+                                )
+                        }
                         accountOnFile.label
                     } else {
                         attribute.value

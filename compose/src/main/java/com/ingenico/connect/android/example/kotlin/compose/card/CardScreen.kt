@@ -20,7 +20,6 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
-import androidx.compose.ui.platform.SoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -133,7 +132,7 @@ private fun analyzeFormValidationResult(
     when(formValidationResult) {
         is FormValidationResult.InvalidWithValidationErrorMessage -> {
             cardScreenViewModel.setFieldErrors(
-                (formValidationResult as FormValidationResult.InvalidWithValidationErrorMessage).exceptions
+                (formValidationResult).exceptions
             )
         }
         is FormValidationResult.Valid -> {

@@ -5,19 +5,18 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
     ext {
-        core_version = "1.10.1"
+        core_version = "1.12.0"
         appCompat_version = "1.6.1"
-        material_version = "1.9.0"
-        lifecycle_version = "2.6.1"
-        navigation_version = '2.6.0'
-        compose_version = '1.4.3'
-        compose_material_version = '1.4.3'
-        coroutines_version = '1.7.2'
+        material_version = "1.11.0"
+        lifecycle_version = "2.7.0"
+        navigation_version = '2.7.6'
+        compose_version = '1.5.4'
+        compose_material_version = '1.5.4'
+        coroutines_version = '1.7.3'
         googlePay_version = '19.2.0'
-        connectSDK_version = '6.1.5'
+        connectSDK_version = '6.2.0'
         gson_version = '2.10.1'
         kotlin_jvm_target = '17'
-        google_accompanist_version = '0.30.1'
         java_version = JavaVersion.VERSION_17
     }
     repositories {
@@ -25,9 +24,9 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:8.0.2'
+        classpath 'com.android.tools.build:gradle:8.2.1'
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$navigation_version"
-        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.22'
+        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.22'
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }

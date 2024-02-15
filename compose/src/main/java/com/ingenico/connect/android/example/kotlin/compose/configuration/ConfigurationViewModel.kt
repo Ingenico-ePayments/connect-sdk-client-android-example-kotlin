@@ -159,7 +159,7 @@ data class ConfigurationUiState(
 )
 
 sealed class ConfigurationStatus {
-    object InValid : ConfigurationStatus()
-    object Valid : ConfigurationStatus()
-    object None : ConfigurationStatus()
+    data object InValid : ConfigurationStatus()
+    data object Valid : ConfigurationStatus()
+    data object None : ConfigurationStatus()
 }

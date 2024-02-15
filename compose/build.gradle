@@ -10,12 +10,11 @@ plugins {
 android {
     namespace 'com.ingenico.connect.android.example.kotlin.compose'
 
-    compileSdk 33
-
     defaultConfig {
         applicationId "com.example.android.exampleapp.compose"
         minSdk 21
-        targetSdk 33
+        compileSdk 34
+        targetSdk 34
         versionCode 1
         versionName "1.0"
 
@@ -36,7 +35,7 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.4.8"
+        kotlinCompilerExtensionVersion = "1.5.8"
     }
 
     compileOptions {
@@ -80,9 +79,8 @@ dependencies {
     implementation "androidx.compose.ui:ui:$compose_version"
     implementation "androidx.compose.material:material:$compose_material_version"
     implementation "androidx.compose.ui:ui-tooling-preview:$compose_version"
-    implementation 'androidx.activity:activity-compose:1.7.2'
-    implementation "com.google.accompanist:accompanist-insets:$google_accompanist_version"
-    implementation "com.google.accompanist:accompanist-navigation-animation:$google_accompanist_version"
+    implementation 'androidx.activity:activity-compose:1.8.2'
+    implementation "com.google.accompanist:accompanist-navigation-animation:0.32.0"
     implementation "androidx.compose.material:material-icons-extended:$compose_material_version"
     implementation "androidx.compose.runtime:runtime-livedata:$compose_version"
     debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
